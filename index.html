@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ghana School of Law Campus Maps</title>
+<meta name="description" content="Interactive maps of every Ghana School of Law campus.">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/home.css">
+<script src="assets/js/icons.js" defer></script>
+<script src="assets/data/campuses.js" defer></script>
+<script src="assets/js/home.js" defer></script>
+</head>
+<body>
+
+<header>
+  <div class="wrap bar">
+    <span class="crest">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M3 6.4l6-2.2 6 2.2 6-2.2v13.4l-6 2.2-6-2.2-6 2.2z"/><path d="M9 4.2v15.4M15 6.4v15.4"/>
+      </svg>
+    </span>
+    <strong>Ghana School of Law</strong>
+  </div>
+</header>
+
+<div class="wrap">
+  <section class="lede">
+    <h1>Campus Maps</h1>
+    <p>Find your way around each Ghana School of Law campus. Select a campus to open its
+       interactive map, then choose a building to see what is inside it.</p>
+  </section>
+
+  <!-- Cards are built by assets/js/home.js from assets/data/campuses.js -->
+  <section class="grid" id="grid"></section>
+</div>
+
+<footer>
+  <div class="wrap">Ghana School of Law campus maps. Building names and details are updated as the school confirms them.</div>
+</footer>
+
+</body>
+</html>

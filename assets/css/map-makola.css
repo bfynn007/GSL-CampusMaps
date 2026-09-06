@@ -1,0 +1,156 @@
+/* =============================================================================
+   map-makola.css — the Makola campus map only.
+   Requires base.css and map.css, and must load after both.
+
+   Makola is the one campus with traced building footprints, a room-level
+   search and the emergency service layers, so everything below is additive
+   to the shared map shell.
+   ========================================================================== */
+
+/* ---------- the plan ----------
+   The source plan carries a wide empty margin; .layer crops to the campus
+   itself while keeping every coordinate in the original 1512 x 1036 space. */
+.canvas{aspect-ratio:855/990}
+.layer{position:absolute; left:-34.50%; top:-1.01%; width:176.84%; height:104.65%}
+.layer img{display:block; width:100%; height:auto; filter:saturate(.84) contrast(1.03)}
+.layer svg.shapes{position:absolute; inset:0; width:100%; height:100%}
+
+/* ---------- traced building footprints ---------- */
+.shape{
+  fill:transparent; stroke:transparent; stroke-width:4; stroke-linejoin:round;
+  cursor:pointer; transition:fill .2s var(--ease), stroke .2s var(--ease);
+}
+.shape.hot{fill:rgba(26,97,82,.22); stroke:rgba(26,97,82,.9)}
+.shape.on{fill:rgba(210,148,51,.36); stroke:var(--gold); stroke-width:5}
+
+/* picked from the dropdown: two bright pulses so it is impossible to miss */
+.shape.flash{animation:flash 1.05s var(--ease) 2}
+@keyframes flash{
+  0%,100%{fill:rgba(210,148,51,.36); stroke-width:5}
+  45%    {fill:rgba(238,178,84,.72); stroke-width:8}
+}
+
+/* ---------- pointer chip ----------
+   Narrow, because fifteen pointers sit close together here. Semi-transparent
+   so the roof shows through; the backdrop blur is what keeps 11.5px text
+   legible over a busy aerial photograph. */
+.chip{
+  max-width:96px; padding:3px 8px;
+  background:rgba(255,253,247,.62);
+  -webkit-backdrop-filter:blur(5px) saturate(1.15);
+  backdrop-filter:blur(5px) saturate(1.15);
+  border:1px solid rgba(255,253,247,.5);
+}
+
+/* ---------- selection ring on the ground ---------- */
+.ring{
+  position:absolute; left:50%; bottom:-7px; width:22px; height:22px;
+  margin-left:-11px; border-radius:50%; border:2px solid var(--gold);
+  opacity:0; pointer-events:none;
+}
+.pin.on .ring{animation:ping 1.9s var(--ease) infinite}
+@keyframes ping{
+  0%  {transform:scale(.4)  scaleY(.42); opacity:.9}
+  70% {transform:scale(2.1) scaleY(.42); opacity:0}
+  100%{transform:scale(2.1) scaleY(.42); opacity:0}
+}
+.canvas.rest .ring{animation-play-state:paused}
+
+/* ---------- search box inside the locations panel ---------- */
+.panel{width:352px}
+.panel-search{position:relative; padding:11px 11px 9px; border-bottom:1px solid var(--line)}
+.panel-search svg{
+  position:absolute; left:22px; top:50%; transform:translateY(-50%);
+  width:15px; height:15px; color:var(--muted); pointer-events:none;
+}
+#q{
+  width:100%; padding:9px 12px 9px 34px; font:inherit; font-size:16px; color:var(--ink);
+  background:var(--paper); border:1px solid transparent; border-radius:8px;
+}
+#q::placeholder{color:var(--muted)}
+#q:focus{outline:none; border-color:var(--green); background:var(--surface)}
+#q::-webkit-search-cancel-button{-webkit-appearance:none}
+
+.empty{padding:20px 12px; text-align:center; font-size:13.5px; color:var(--muted)}
+.empty b{display:block; color:var(--ink); font-weight:600; margin-bottom:3px}
+
+/* ---------- emergency service buttons (top-right of the map box) ---------- */
+.svc-bar{position:absolute; top:21px; right:21px; z-index:20; display:flex; gap:8px}
+.svc-btn{
+  display:flex; align-items:center; gap:8px;
+  padding:8px 13px 8px 9px; font:inherit; font-size:13px; font-weight:650;
+  cursor:pointer; border-radius:99px; border:1.5px solid;
+  background:var(--surface); box-shadow:var(--shadow-md);
+  transition:transform .22s var(--spring), box-shadow .2s, background-color .2s, color .2s;
+}
+.svc-btn:hover{transform:translateY(-2px); box-shadow:var(--shadow-lg)}
+.svc-btn svg{width:21px; height:21px; flex:none}
+.svc-btn.clinic{color:#982c25; border-color:#e2b3ae}
+.svc-btn.washroom{color:#22557a; border-color:#a9c8dd}
+.svc-btn.clinic[aria-pressed="true"]{background:#b3352d; border-color:#8a251f; color:#fff}
+.svc-btn.washroom[aria-pressed="true"]{background:#2b6b96; border-color:#1d4b6d; color:#fff}
+.svc-btn[aria-pressed="true"]{box-shadow:var(--shadow-lg)}
+
+/* ---------- service layer ----------
+   While a service layer is on, the ordinary pointers step back. */
+.pins.dim .pin{opacity:.3; pointer-events:none; filter:saturate(.25)}
+.pins.dim .chip{display:none}   /* only the service labels read while a layer is on */
+.svcpins{position:absolute; inset:0; z-index:2}
+.svcpins[hidden]{display:none}
+
+.pin.tone-red  .arrow .body{fill:url(#gradRed)}
+.pin.tone-blue .arrow .body{fill:url(#gradBlue)}
+.pin.tone-red  .chip{background:rgba(251,234,232,.72); color:#7d221c; border-color:rgba(226,179,174,.7)}
+.pin.tone-blue .chip{background:rgba(232,241,248,.72); color:#1a4467; border-color:rgba(169,200,221,.7)}
+.pin.tone-red .ground,
+.pin.tone-blue .ground{background:radial-gradient(ellipse at center, rgba(23,35,31,.5), rgba(23,35,31,0) 72%)}
+.pin.tone-red:hover  .chip,.pin.tone-red.on  .chip{background:#b3352d; color:#fff; border-color:#8a251f}
+.pin.tone-blue:hover .chip,.pin.tone-blue.on .chip{background:#2b6b96; color:#fff; border-color:#1d4b6d}
+.pin.tone-red.on .arrow .body,.pin.tone-blue.on .arrow .body{stroke-width:2.2}
+.pin.tone-red  .ring{border-color:#b3352d}
+.pin.tone-blue .ring{border-color:#2b6b96}
+
+.shape.tone-red {fill:rgba(179,53,45,.30);  stroke:#b3352d; stroke-width:5}
+.shape.tone-blue{fill:rgba(43,107,150,.30); stroke:#2b6b96; stroke-width:5}
+.shape.soft-red {fill:rgba(179,53,45,.11);  stroke:rgba(179,53,45,.55);  stroke-width:3}
+.shape.soft-blue{fill:rgba(43,107,150,.11); stroke:rgba(43,107,150,.55); stroke-width:3}
+.svc-shape{pointer-events:none}
+
+/* ---------- details card ---------- */
+.info{padding:17px 17px 15px; overflow:auto}
+.info .desc{margin:0 0 12px; font-size:13.5px; line-height:1.5; color:var(--muted)}
+.info h2{margin-right:28px; margin-bottom:7px}
+
+.fact.tally{color:var(--gold-700); background:#f8ecd8}
+.fact.warn{color:#8a3a2f; background:#f6e2dd}
+.fact.clinic{color:#8a251f; background:#fbeae8}
+.fact.wc{color:#1d4b6d; background:#e8f1f8}
+
+.rooms{margin:0; padding:0; list-style:none; font-size:13.5px}
+.rooms li{
+  padding:5px 0 5px 15px; position:relative; line-height:1.4;
+  border-top:1px solid rgba(222,216,203,.65);
+}
+.rooms li:first-child{border-top:0}
+.rooms li::before{
+  content:""; position:absolute; left:2px; top:12px;
+  width:5px; height:5px; border-radius:99px; background:var(--line);
+}
+.rooms li.match{font-weight:600; color:var(--gold-700)}
+.rooms li.match::before{background:var(--gold)}
+
+.close{width:28px; height:28px; border-radius:7px}
+
+/* ---------- narrow screens ---------- */
+@media(max-width:720px){
+  .panel{width:auto}
+  .svc-bar{top:13px; right:13px; gap:6px}
+  .svc-btn{padding:9px; border-radius:50%}
+  .svc-btn .label{display:none}
+  .info{padding-bottom:24px}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .ring{display:none}
+  .shape.flash{animation-iteration-count:1}
+}

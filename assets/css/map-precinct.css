@@ -1,0 +1,116 @@
+/* =============================================================================
+   map-precinct.css — the illustrated precinct maps (GIMPA and KNUST).
+   Requires base.css and map.css, and must load after both.
+
+   These campuses have no traced building footprints, so a venue is marked by
+   a soft halo under its pointer rather than by an outline, and the plan is
+   annotated with static road and landmark names.
+   ========================================================================== */
+
+/* ---------- the plan ----------
+   No fixed aspect ratio: the plan image sets the height, so these pages work
+   whatever dimensions the illustration turns out to be. */
+.canvas img.plan{display:block; width:100%; height:auto; filter:saturate(.92)}
+.pins{z-index:2}
+
+/* ---------- halo in place of a building outline ---------- */
+.halo{
+  position:absolute; width:var(--r,12%); aspect-ratio:1;
+  transform:translate(-50%,-50%); border-radius:50%; pointer-events:none;
+  background:radial-gradient(circle, rgba(26,97,82,.30), rgba(26,97,82,.10) 55%, rgba(26,97,82,0) 72%);
+  opacity:0; transition:opacity .25s var(--ease);
+}
+.halo.hot{opacity:1}
+.halo.on{
+  opacity:1;
+  background:radial-gradient(circle, rgba(210,148,51,.52), rgba(210,148,51,.18) 55%, rgba(210,148,51,0) 72%);
+}
+.halo.on::after{
+  content:""; position:absolute; inset:14%; border-radius:50%;
+  border:2.5px solid var(--gold); animation:pulse 1.9s var(--ease) infinite;
+}
+@keyframes pulse{
+  0%  {transform:scale(.72); opacity:.95}
+  70% {transform:scale(1.25); opacity:0}
+  100%{opacity:0}
+}
+.canvas.rest .halo::after{animation-play-state:paused}
+
+/* ---------- static map labels ----------
+   Roads and landmarks, named the way a printed map names them.
+   No arrow, no hit area, no detail card. */
+.landmarks{position:absolute; inset:0; width:100%; height:100%; pointer-events:none; z-index:1}
+.landmarks text{
+  paint-order:stroke fill; stroke:#fffdf7; stroke-width:5; stroke-linejoin:round;
+  font-family:ui-sans-serif,system-ui,"Segoe UI",Roboto,sans-serif;
+}
+.landmarks .road{fill:#6b563c; font-size:21px; font-weight:600; letter-spacing:1.6px; text-transform:uppercase}
+.landmarks .spot{fill:#3d4034; font-size:20px; font-weight:550; letter-spacing:.2px}
+.canvas.nolabels .landmarks{display:none}
+@media(max-width:620px){ .landmarks{display:none} }   /* too small to read */
+
+/* ---------- pointer chip ----------
+   Wider and near-opaque: these venues are far apart, and the illustrated plan
+   is busy enough that a translucent chip would not read. */
+.chip{
+  max-width:150px;
+  background:rgba(255,253,247,.96);
+  border:1px solid rgba(222,216,203,.9);
+}
+
+/* ---------- details card ----------
+   Padding lives on .pad so the photograph can run edge to edge. */
+.info{padding:0 0 15px; overflow:hidden; overflow-y:auto}
+.pad{padding:15px 17px 0}
+.shot{
+  display:block; width:100%; height:auto;
+  background:var(--paper); border-bottom:1px solid var(--line);
+}
+.shot.missing{display:none}   /* set by the script when the artwork is absent */
+.info .sub{margin:0 0 11px; font-size:13px; line-height:1.45; color:var(--muted)}
+
+.classes{margin:0; padding:0; list-style:none}
+.classes li{
+  padding:8px 10px; margin-bottom:5px; border-radius:9px;
+  background:#f8ecd8; font-size:13px; line-height:1.4;
+}
+.classes li:last-child{margin-bottom:0}
+.classes b{
+  display:block; font-size:11px; font-weight:650; letter-spacing:.05em;
+  text-transform:uppercase; color:var(--gold-700); margin-bottom:2px;
+}
+.classes span{display:block; font-weight:600; color:var(--ink)}
+.classes small{display:block; margin-top:2px; font-size:12px; color:var(--muted)}
+
+.coords{display:flex; align-items:baseline; gap:8px; margin:10px 0 0; font-size:12.5px; color:var(--ink)}
+.coords b{
+  font-size:11px; font-weight:650; text-transform:uppercase;
+  letter-spacing:.085em; color:var(--muted); flex:none;
+}
+.coords span{font-variant-numeric:tabular-nums; letter-spacing:-.01em}
+
+.maps{
+  display:flex; align-items:center; justify-content:center; gap:8px;
+  margin-top:13px; padding:11px 14px; border-radius:10px;
+  font-size:13.5px; font-weight:650; text-decoration:none;
+  color:#fffdf7; background:var(--green); border:1px solid var(--green-700);
+  box-shadow:var(--shadow-sm);
+  transition:background-color .16s, transform .16s var(--ease), box-shadow .16s;
+}
+.maps:hover{background:var(--green-700); transform:translateY(-1px); box-shadow:var(--shadow-md)}
+.maps svg{width:15px; height:15px; flex:none}
+
+/* The close button sits over the photograph, so it needs its own ground. */
+.close{
+  width:30px; height:30px;
+  background:rgba(255,253,247,.92); color:var(--ink); box-shadow:var(--shadow-sm);
+}
+
+/* ---------- narrow screens ---------- */
+@media(max-width:720px){
+  .info{max-height:64vh}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .halo.on::after{animation:none}
+}
