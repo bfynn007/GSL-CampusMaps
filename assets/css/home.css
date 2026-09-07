@@ -1,6 +1,6 @@
 /* =============================================================================
-   home.css — the campus index (index.html) only.
-   Requires base.css.
+   home.css — the landing page (index.html) only.
+   Requires base.css. The campus chooser lives on campuses.html.
    ========================================================================== */
 
 :root{--wrap:1120px}
@@ -18,33 +18,38 @@ header{border-bottom:1px solid var(--line); background:var(--surface)}
 .crest svg{width:19px; height:19px}
 
 /* =============================================================================
-   Hero
+   Hero — the page is only this, so it fills the screen on purpose.
    ========================================================================== */
 
-.hero{padding:clamp(40px,6.5vw,84px) 0 clamp(44px,6vw,76px)}
+.hero{
+  display:grid; align-items:center;
+  min-height:calc(100svh - 67px);
+  padding:clamp(40px,6vw,72px) 0;
+}
 .hero-grid{
-  display:grid; gap:clamp(34px,5vw,60px);
-  grid-template-columns:1fr; align-items:center;
+  display:grid; gap:clamp(34px,5vw,64px);
+  grid-template-columns:1fr; align-items:center; width:100%;
 }
 @media(min-width:900px){
   .hero-grid{grid-template-columns:minmax(0,1fr) minmax(0,400px)}
 }
 
 .hero-copy h1{
-  margin:0 0 16px;
-  font-size:clamp(2.3rem,5.4vw,3.5rem);
-  line-height:1.04; font-weight:680; letter-spacing:-.035em;
+  margin:0 0 18px;
+  font-family:var(--display); font-optical-sizing:auto;
+  font-size:clamp(2.6rem,6vw,4.1rem);
+  line-height:1.02; font-weight:600; letter-spacing:-.022em;
   text-wrap:balance;
 }
 .deck{
   margin:0; max-width:52ch;
-  font-size:clamp(1rem,1.5vw,1.09rem); line-height:1.6;
+  font-size:clamp(1rem,1.5vw,1.11rem); line-height:1.62;
   color:var(--muted); text-wrap:pretty;
 }
 
 .hero-cta{
-  display:inline-flex; align-items:center; gap:9px; margin-top:26px;
-  padding:12px 20px 12px 22px; border-radius:99px;
+  display:inline-flex; align-items:center; gap:9px; margin-top:28px;
+  padding:13px 21px 13px 23px; border-radius:99px;
   font-size:14.5px; font-weight:650; letter-spacing:-.006em; text-decoration:none;
   color:#fffdf7; background:var(--green); border:1px solid var(--green-700);
   box-shadow:var(--shadow-sm);
@@ -52,11 +57,11 @@ header{border-bottom:1px solid var(--line); background:var(--surface)}
 }
 .hero-cta svg{width:15px; height:15px; transition:transform .3s var(--spring)}
 .hero-cta:hover{background:var(--green-700); box-shadow:var(--shadow-md); transform:translateY(-1px)}
-.hero-cta:hover svg{transform:translateY(3px)}
+.hero-cta:hover svg{transform:translateX(4px)}
 
 /* ---------- the illustrated plan ----------
-   Framed like the .stage on the map pages, so the homepage and the maps read
-   as one product. The drawing itself is generic on purpose. */
+   Framed like the .stage on the map pages, so the landing page and the maps
+   read as one product. The drawing itself is generic on purpose. */
 .hero-figure{justify-self:center; width:100%; max-width:400px}
 .hero-stage{
   background:var(--surface); border:1px solid var(--line);
@@ -98,88 +103,8 @@ header{border-bottom:1px solid var(--line); background:var(--surface)}
   fill:url(#gradGreen);
   filter:drop-shadow(0 3px 4px rgba(23,35,31,.32));
 }
-/* nothing loops while the preview is off screen */
+/* nothing loops while the plan is off screen */
 .hero-canvas.rest .hero-bob,.hero-canvas.rest .hero-ground{animation-play-state:paused}
-
-/* =============================================================================
-   Campus list
-   ========================================================================== */
-
-.campuses{padding-bottom:clamp(56px,8vw,96px); scroll-margin-top:24px}
-.campuses h2{
-  margin:0 0 22px; font-size:15px; font-weight:650;
-  letter-spacing:.08em; text-transform:uppercase; color:var(--muted);
-}
-
-.grid{display:grid; gap:20px; grid-template-columns:1fr}
-@media(min-width:660px){ .grid{grid-template-columns:repeat(2,1fr)} }
-@media(min-width:980px){ .grid{grid-template-columns:repeat(3,1fr)} }
-
-.card{
-  display:flex; flex-direction:column; overflow:hidden;
-  background:var(--surface); border:1px solid var(--line);
-  border-radius:16px; box-shadow:var(--shadow-sm);
-  color:inherit; text-decoration:none;
-  transition:transform .24s var(--ease), box-shadow .24s var(--ease), border-color .18s;
-}
-.card:hover{transform:translateY(-4px); box-shadow:var(--shadow-lg); border-color:rgba(26,97,82,.45)}
-
-.thumb{
-  position:relative; aspect-ratio:16/11; overflow:hidden;
-  background:#efe6e6; border-bottom:1px solid var(--line);
-}
-.thumb img{
-  width:100%; height:100%; object-fit:cover; display:block;
-  filter:saturate(.86); transition:filter .35s var(--ease), transform .5s var(--ease);
-}
-.card:hover .thumb img{filter:saturate(1); transform:scale(1.03)}
-
-/* Placeholder art for a campus whose plan artwork has not arrived yet. */
-.thumb.blank{background:var(--paper); display:grid; place-items:center}
-.thumb.blank svg{width:100%; height:100%; opacity:.5}
-
-.tag{
-  position:absolute; top:11px; left:11px; padding:4px 10px;
-  border-radius:99px; font-size:11px; font-weight:650;
-  letter-spacing:.03em; text-transform:uppercase;
-  background:rgba(255,253,247,.94); color:var(--green-700);
-  box-shadow:var(--shadow-sm);
-}
-
-.card-body{padding:16px 17px 18px; display:flex; flex-direction:column; flex:1}
-.card-body h3{margin:0; font-size:17.5px; font-weight:660; letter-spacing:-.018em}
-.place{
-  display:flex; align-items:center; gap:5px; margin:5px 0 0;
-  font-size:12.5px; font-weight:550; color:var(--green);
-}
-.place svg{width:12px; height:12px; flex:none}
-.note{margin:9px 0 0; font-size:13.5px; line-height:1.5; color:var(--muted)}
-
-.foot{
-  display:flex; align-items:center; gap:6px; margin-top:auto; padding-top:15px;
-  font-size:13px; font-weight:650; color:var(--green);
-}
-.foot svg{width:14px; height:14px; transition:transform .25s var(--spring)}
-.card:hover .foot svg{transform:translateX(4px)}
-
-/* ---------- campuses without a map yet ----------
-   Kept visible and honest, but clearly a step below the maps that work. */
-.upcoming{
-  display:flex; flex-wrap:wrap; align-items:center; gap:10px 14px;
-  margin-top:26px; padding:16px 18px;
-  background:var(--surface); border:1px solid var(--line); border-radius:14px;
-}
-.upcoming[hidden]{display:none}
-.upcoming b{font-size:13px; font-weight:650; color:var(--ink)}
-.upcoming ul{display:flex; flex-wrap:wrap; gap:7px; margin:0; padding:0; list-style:none}
-.upcoming li{
-  padding:4px 11px; border-radius:99px;
-  font-size:12.5px; font-weight:550; color:var(--muted);
-  background:var(--paper); border:1px solid var(--line);
-}
-.upcoming .aside{
-  flex:1 1 100%; margin:0; font-size:12.5px; line-height:1.5; color:var(--muted);
-}
 
 /* =============================================================================
    Arrival
@@ -194,18 +119,15 @@ header{border-bottom:1px solid var(--line); background:var(--surface)}
   to  {opacity:1; transform:none}
 }
 
-/* The preview gets the authored entrance: it settles in rather than fading. */
+/* The plan gets the authored entrance: it settles in rather than fading. */
 .hero-figure{animation:settle 1s var(--ease) .12s both}
 @keyframes settle{
   from{opacity:0; transform:translateY(26px) scale(.965)}
   to  {opacity:1; transform:none}
 }
 
-.card{animation:rise .7s var(--ease) both; animation-delay:calc(.3s + var(--i,0) * .08s)}
-
 @media(prefers-reduced-motion:reduce){
   .hero-bob,.hero-ground{animation:none; transform:none}
-  .hero-copy > *,.hero-figure,.card{animation:none}
-  .hero-cta:hover,.card:hover{transform:none}
-  .card:hover .thumb img{transform:none}
+  .hero-copy > *,.hero-figure{animation:none}
+  .hero-cta:hover{transform:none}
 }

@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Choose your campus — Ghana School of Law</title>
+<meta name="description" content="Pick a Ghana School of Law campus to open its interactive map.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500..700&display=swap">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/campuses.css">
+<script src="assets/js/icons.js" defer></script>
+<script src="assets/data/campuses.js" defer></script>
+<script src="assets/js/campus-list.js" defer></script>
+</head>
+<body>
+
+<header>
+  <div class="wrap bar">
+    <a class="home" href="index.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M19 12H6M11 5.5L5 12l6 6.5"/>
+      </svg>
+      <span>Home</span>
+    </a>
+    <span class="crest">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M3 6.4l6-2.2 6 2.2 6-2.2v13.4l-6 2.2-6-2.2-6 2.2z"/><path d="M9 4.2v15.4M15 6.4v15.4"/>
+      </svg>
+    </span>
+    <strong>Ghana School of Law</strong>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="intro">
+    <h1>Choose your campus</h1>
+    <p>Open a campus to see its buildings, classrooms and services on an interactive plan.</p>
+  </div>
+
+  <!-- Rows are built by assets/js/campus-list.js from assets/data/campuses.js -->
+  <ul class="campus-list" id="list"></ul>
+  <section class="upcoming" id="upcoming" hidden></section>
+</main>
+
+</body>
+</html>

@@ -5,10 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ghana School of Law Campus Maps</title>
 <meta name="description" content="Interactive maps of every Ghana School of Law campus. Find your lecture hall, the registry, the clinic and every washroom.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500..700&display=swap">
 <link rel="stylesheet" href="assets/css/base.css">
 <link rel="stylesheet" href="assets/css/home.css">
-<script src="assets/js/icons.js" defer></script>
-<script src="assets/data/campuses.js" defer></script>
 <script src="assets/js/home.js" defer></script>
 </head>
 <body>
@@ -47,10 +48,10 @@
         <h1>Find your way around campus.</h1>
         <p class="deck">Interactive maps of every Ghana School of Law campus. Find your lecture
            hall, the registry, the clinic and every washroom, without having to ask.</p>
-        <a class="hero-cta" href="#campuses">
+        <a class="hero-cta" href="campuses.html">
           Choose your campus
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M12 5v13M6.5 12.5 12 18l5.5-5.5"/>
+            <path d="M5 12h13M13 6.5l5.5 5.5L13 17.5"/>
           </svg>
         </a>
       </div>
@@ -138,13 +139,6 @@
       </div>
 
     </div>
-  </section>
-
-  <section class="campuses wrap" id="campuses">
-    <h2>Choose your campus</h2>
-    <!-- Cards are built by assets/js/home.js from assets/data/campuses.js -->
-    <div class="grid" id="grid"></div>
-    <div class="upcoming" id="upcoming" hidden></div>
   </section>
 </main>
 
