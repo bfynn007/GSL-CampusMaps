@@ -177,12 +177,20 @@
     info.hidden = false;
     map.replayEntrance(info, function () { map.placeCard(canvas, pin, info, 18); });
 
-    // The illustrated view for a venue may not have been drawn yet. The
-    // listener is safe to attach here: the load only starts once the markup is
-    // in the document, so the error cannot have fired already.
+    // .shot reserves its space up front, so the card is measured correctly on
+    // a fresh load. Re-anchor once the image settles anyway: a venue whose
+    // illustration has not been drawn yet loses that space again, which
+    // changes the height the card was positioned against.
     var shot = info.querySelector('.shot');
     if (shot) {
-      shot.addEventListener('error', function () { shot.classList.add('missing'); });
+      var reanchor = function () {
+        if (selected === id) map.placeCard(canvas, pin, info, 18);
+      };
+      shot.addEventListener('load', reanchor);
+      shot.addEventListener('error', function () {
+        shot.classList.add('missing');
+        reanchor();
+      });
     }
 
     info.querySelector('.close').addEventListener('click', function () {
