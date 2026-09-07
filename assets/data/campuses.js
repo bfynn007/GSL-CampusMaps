@@ -16,10 +16,9 @@ window.GSL.campuses = [
     note: 'The main campus off Independence Avenue. 15 locations, plus the clinic and every washroom.',
     classTypes: ['Pre-Bar', 'Part II', 'Post Call'],
     href: 'makola-campus-map.html',
-    thumb: 'assets/img/makola/makola-campus-plan.webp',
-    // This plan is drawn with a wide empty margin, so it needs a nudge to fill
-    // its frame the way the photographed plans do.
-    frame: { zoom: 1.22 }
+    // The wider precinct view, matching how KNUST and GIMPA are shown here.
+    // The map page itself still uses the close-up traced plan.
+    thumb: 'assets/img/makola/makola-precinct-plan.webp'
   },
   {
     name: 'KNUST Campus',
