@@ -54,41 +54,19 @@ header{border-bottom:1px solid var(--line); background:var(--surface)}
 .hero-cta:hover{background:var(--green-700); box-shadow:var(--shadow-md); transform:translateY(-1px)}
 .hero-cta:hover svg{transform:translateY(3px)}
 
-/* ---------- the plan preview ----------
-   .hero-layer reproduces the crop used on the Makola map, so the plan is
-   framed identically and the pin percentages carry over unchanged. */
-.hero-map{display:block; text-decoration:none; color:inherit; justify-self:center; width:100%; max-width:400px}
+/* ---------- the illustrated plan ----------
+   Framed like the .stage on the map pages, so the homepage and the maps read
+   as one product. The drawing itself is generic on purpose. */
+.hero-figure{justify-self:center; width:100%; max-width:400px}
 .hero-stage{
-  position:relative; display:block;
   background:var(--surface); border:1px solid var(--line);
   border-radius:18px; padding:10px; box-shadow:var(--shadow-md);
-  transition:transform .3s var(--ease), box-shadow .3s var(--ease), border-color .2s;
 }
-.hero-map:hover .hero-stage{
-  transform:translateY(-4px);
-  box-shadow:var(--shadow-lg); border-color:rgba(26,97,82,.45);
-}
-.hero-map:focus-visible{outline:none}
-.hero-map:focus-visible .hero-stage{outline:2px solid var(--green); outline-offset:4px}
-
 .hero-canvas{
-  position:relative; display:block; overflow:hidden;
-  aspect-ratio:855/990; border-radius:11px; background:#efe6e6;
+  position:relative; overflow:hidden;
+  aspect-ratio:5/6; border-radius:11px; background:var(--paper);
 }
-.hero-layer{position:absolute; left:-34.50%; top:-1.01%; width:176.84%; height:104.65%}
-.hero-layer img{
-  display:block; width:100%; height:auto;
-  filter:saturate(.84) contrast(1.03);
-  transition:filter .35s var(--ease);
-}
-.hero-map:hover .hero-layer img{filter:saturate(1) contrast(1.03)}
-
-.hero-tag{
-  position:absolute; left:20px; bottom:20px;
-  padding:5px 11px; border-radius:99px;
-  font-size:11.5px; font-weight:650; letter-spacing:.03em; text-transform:uppercase;
-  color:var(--green-700); background:rgba(255,253,247,.94); box-shadow:var(--shadow-sm);
-}
+.hero-plan{display:block; width:100%; height:100%}
 
 /* ---------- the pointer motif, borrowed from the maps ----------
    Static and non-interactive here: the tip rests on its plan coordinate, the
@@ -119,13 +97,6 @@ header{border-bottom:1px solid var(--line); background:var(--surface)}
   display:block; width:25px; height:29px;
   fill:url(#gradGreen);
   filter:drop-shadow(0 3px 4px rgba(23,35,31,.32));
-}
-.hero-pin.gold .hero-arrow{width:28px; height:32px; fill:url(#gradGold)}
-.hero-chip{
-  padding:3px 8px; border-radius:7px; white-space:nowrap;
-  font-size:11px; font-weight:600; letter-spacing:-.005em;
-  color:#2a1c05; background:var(--gold);
-  border:1px solid var(--gold-700); box-shadow:var(--shadow-sm);
 }
 /* nothing loops while the preview is off screen */
 .hero-canvas.rest .hero-bob,.hero-canvas.rest .hero-ground{animation-play-state:paused}
@@ -224,7 +195,7 @@ header{border-bottom:1px solid var(--line); background:var(--surface)}
 }
 
 /* The preview gets the authored entrance: it settles in rather than fading. */
-.hero-map{animation:settle 1s var(--ease) .12s both}
+.hero-figure{animation:settle 1s var(--ease) .12s both}
 @keyframes settle{
   from{opacity:0; transform:translateY(26px) scale(.965)}
   to  {opacity:1; transform:none}
@@ -234,7 +205,7 @@ header{border-bottom:1px solid var(--line); background:var(--surface)}
 
 @media(prefers-reduced-motion:reduce){
   .hero-bob,.hero-ground{animation:none; transform:none}
-  .hero-copy > *,.hero-map,.card{animation:none}
-  .hero-cta:hover,.card:hover,.hero-map:hover .hero-stage{transform:none}
+  .hero-copy > *,.hero-figure,.card{animation:none}
+  .hero-cta:hover,.card:hover{transform:none}
   .card:hover .thumb img{transform:none}
 }

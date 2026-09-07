@@ -92,7 +92,7 @@
     if (!campuses.length) return;
 
     var lead = document.createElement('b');
-    lead.textContent = 'Being mapped next';
+    lead.textContent = 'Coming next';
 
     var list = document.createElement('ul');
     campuses.forEach(function (campus) {
@@ -103,7 +103,7 @@
 
     var aside = document.createElement('p');
     aside.className = 'aside';
-    aside.textContent = 'Building names and details are updated as the school confirms them.';
+    aside.textContent = 'These campuses are being mapped out.';
 
     host.append(lead, list, aside);
     host.hidden = false;
