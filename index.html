@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ghana School of Law Campus Maps</title>
-<meta name="description" content="Interactive maps of every Ghana School of Law campus.">
+<meta name="description" content="Interactive maps of every Ghana School of Law campus. Find your lecture hall, the registry, the clinic and every washroom.">
 <link rel="stylesheet" href="assets/css/base.css">
 <link rel="stylesheet" href="assets/css/home.css">
 <script src="assets/js/icons.js" defer></script>
@@ -12,6 +12,24 @@
 <script src="assets/js/home.js" defer></script>
 </head>
 <body>
+
+<!-- Pointer gradients and the shared pointer shape, so the homepage speaks the
+     same visual language as the maps themselves. -->
+<svg width="0" height="0" aria-hidden="true" style="position:absolute">
+  <defs>
+    <linearGradient id="gradGreen" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2c7d6a"/><stop offset="100%" stop-color="#124a3d"/>
+    </linearGradient>
+    <linearGradient id="gradGold" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#eeb254"/><stop offset="100%" stop-color="#b1741f"/>
+    </linearGradient>
+    <symbol id="pinArrow" viewBox="0 0 30 34">
+      <path d="M15 32.4c-.9 0-1.5-.5-1.9-1.1L4.3 16.2C1.7 12 4.7 6.2 9.6 6.2h10.8c4.9 0 7.9 5.8 5.3 10L16.9 31.3c-.4.6-1 1.1-1.9 1.1z"
+            stroke="#fffdf7" stroke-width="1.6"/>
+      <circle cx="15" cy="14.2" r="3.6" fill="#fffdf7" opacity=".95" stroke="none"/>
+    </symbol>
+  </defs>
+</svg>
 
 <header>
   <div class="wrap bar">
@@ -24,20 +42,63 @@
   </div>
 </header>
 
-<div class="wrap">
-  <section class="lede">
-    <h1>Campus Maps</h1>
-    <p>Find your way around each Ghana School of Law campus. Select a campus to open its
-       interactive map, then choose a building to see what is inside it.</p>
+<main>
+  <section class="hero">
+    <div class="wrap hero-grid">
+
+      <div class="hero-copy">
+        <h1>Find your way around campus.</h1>
+        <p class="deck">Interactive maps of every Ghana School of Law campus. Find your lecture
+           hall, the registry, the clinic and every washroom, without having to ask.</p>
+        <a class="hero-cta" href="#campuses">
+          Choose your campus
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 5v13M6.5 12.5 12 18l5.5-5.5"/>
+          </svg>
+        </a>
+      </div>
+
+      <!-- A real plan with real pointers on it: the product showing its own work.
+           The crop and the pin coordinates match makola-campus-map.html exactly. -->
+      <a class="hero-map" href="makola-campus-map.html" aria-label="Open the Makola campus map">
+        <span class="hero-stage">
+          <span class="hero-canvas" id="heroCanvas">
+            <span class="hero-layer">
+              <img src="assets/img/makola/makola-campus-plan.webp" alt="" width="1512" height="1036">
+
+              <span class="hero-pin" style="left:38.03%; top:21.81%; --d:0ms">
+                <span class="hero-bob"><svg class="hero-arrow" aria-hidden="true"><use href="#pinArrow"/></svg></span>
+                <span class="hero-ground"></span>
+              </span>
+
+              <span class="hero-pin" style="left:65.48%; top:52.90%; --d:420ms">
+                <span class="hero-bob"><svg class="hero-arrow" aria-hidden="true"><use href="#pinArrow"/></svg></span>
+                <span class="hero-ground"></span>
+              </span>
+
+              <span class="hero-pin gold" style="left:66.20%; top:71.43%; --d:840ms">
+                <span class="hero-bob">
+                  <span class="hero-chip">The Dome</span>
+                  <svg class="hero-arrow" aria-hidden="true"><use href="#pinArrow"/></svg>
+                </span>
+                <span class="hero-ground"></span>
+              </span>
+            </span>
+          </span>
+          <span class="hero-tag">Makola Campus</span>
+        </span>
+      </a>
+
+    </div>
   </section>
 
-  <!-- Cards are built by assets/js/home.js from assets/data/campuses.js -->
-  <section class="grid" id="grid"></section>
-</div>
-
-<footer>
-  <div class="wrap">Ghana School of Law campus maps. Building names and details are updated as the school confirms them.</div>
-</footer>
+  <section class="campuses wrap" id="campuses">
+    <h2>Choose your campus</h2>
+    <!-- Cards are built by assets/js/home.js from assets/data/campuses.js -->
+    <div class="grid" id="grid"></div>
+    <div class="upcoming" id="upcoming" hidden></div>
+  </section>
+</main>
 
 </body>
 </html>

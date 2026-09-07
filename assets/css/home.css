@@ -3,11 +3,13 @@
    Requires base.css.
    ========================================================================== */
 
-:root{--wrap:1060px}
+:root{--wrap:1120px}
 
 /* ---------- header ---------- */
 header{border-bottom:1px solid var(--line); background:var(--surface)}
-.bar{display:flex; align-items:center; gap:12px; padding:16px 0}
+/* Vertical only, so .wrap keeps supplying the horizontal padding and the
+   wordmark lines up with the hero copy below it. */
+.bar{display:flex; align-items:center; gap:12px; padding-top:16px; padding-bottom:16px}
 .bar strong{font-size:15px; font-weight:650; letter-spacing:-.01em}
 .crest{
   width:34px; height:34px; flex:none; border-radius:9px;
@@ -15,56 +17,224 @@ header{border-bottom:1px solid var(--line); background:var(--surface)}
 }
 .crest svg{width:19px; height:19px}
 
-/* ---------- intro ---------- */
-.lede{padding:44px 0 30px}
-.lede h1{margin:0 0 10px; font-size:34px; line-height:1.15; font-weight:680; letter-spacing:-.028em}
-.lede p{margin:0; max-width:56ch; font-size:15.5px; color:var(--muted)}
+/* =============================================================================
+   Hero
+   ========================================================================== */
 
-/* ---------- campus grid ---------- */
-.grid{display:grid; gap:20px; padding-bottom:72px; grid-template-columns:1fr}
+.hero{padding:clamp(40px,6.5vw,84px) 0 clamp(44px,6vw,76px)}
+.hero-grid{
+  display:grid; gap:clamp(34px,5vw,60px);
+  grid-template-columns:1fr; align-items:center;
+}
+@media(min-width:900px){
+  .hero-grid{grid-template-columns:minmax(0,1fr) minmax(0,400px)}
+}
+
+.hero-copy h1{
+  margin:0 0 16px;
+  font-size:clamp(2.3rem,5.4vw,3.5rem);
+  line-height:1.04; font-weight:680; letter-spacing:-.035em;
+  text-wrap:balance;
+}
+.deck{
+  margin:0; max-width:52ch;
+  font-size:clamp(1rem,1.5vw,1.09rem); line-height:1.6;
+  color:var(--muted); text-wrap:pretty;
+}
+
+.hero-cta{
+  display:inline-flex; align-items:center; gap:9px; margin-top:26px;
+  padding:12px 20px 12px 22px; border-radius:99px;
+  font-size:14.5px; font-weight:650; letter-spacing:-.006em; text-decoration:none;
+  color:#fffdf7; background:var(--green); border:1px solid var(--green-700);
+  box-shadow:var(--shadow-sm);
+  transition:background-color .18s, box-shadow .22s var(--ease), transform .22s var(--ease);
+}
+.hero-cta svg{width:15px; height:15px; transition:transform .3s var(--spring)}
+.hero-cta:hover{background:var(--green-700); box-shadow:var(--shadow-md); transform:translateY(-1px)}
+.hero-cta:hover svg{transform:translateY(3px)}
+
+/* ---------- the plan preview ----------
+   .hero-layer reproduces the crop used on the Makola map, so the plan is
+   framed identically and the pin percentages carry over unchanged. */
+.hero-map{display:block; text-decoration:none; color:inherit; justify-self:center; width:100%; max-width:400px}
+.hero-stage{
+  position:relative; display:block;
+  background:var(--surface); border:1px solid var(--line);
+  border-radius:18px; padding:10px; box-shadow:var(--shadow-md);
+  transition:transform .3s var(--ease), box-shadow .3s var(--ease), border-color .2s;
+}
+.hero-map:hover .hero-stage{
+  transform:translateY(-4px);
+  box-shadow:var(--shadow-lg); border-color:rgba(26,97,82,.45);
+}
+.hero-map:focus-visible{outline:none}
+.hero-map:focus-visible .hero-stage{outline:2px solid var(--green); outline-offset:4px}
+
+.hero-canvas{
+  position:relative; display:block; overflow:hidden;
+  aspect-ratio:855/990; border-radius:11px; background:#efe6e6;
+}
+.hero-layer{position:absolute; left:-34.50%; top:-1.01%; width:176.84%; height:104.65%}
+.hero-layer img{
+  display:block; width:100%; height:auto;
+  filter:saturate(.84) contrast(1.03);
+  transition:filter .35s var(--ease);
+}
+.hero-map:hover .hero-layer img{filter:saturate(1) contrast(1.03)}
+
+.hero-tag{
+  position:absolute; left:20px; bottom:20px;
+  padding:5px 11px; border-radius:99px;
+  font-size:11.5px; font-weight:650; letter-spacing:.03em; text-transform:uppercase;
+  color:var(--green-700); background:rgba(255,253,247,.94); box-shadow:var(--shadow-sm);
+}
+
+/* ---------- the pointer motif, borrowed from the maps ----------
+   Static and non-interactive here: the tip rests on its plan coordinate, the
+   ground shadow stays planted and shrinks as the pointer lifts. */
+.hero-pin{
+  position:absolute; transform:translate(-50%,-100%);
+  display:flex; flex-direction:column; align-items:center; line-height:1;
+}
+.hero-bob{
+  display:flex; flex-direction:column; align-items:center; gap:5px;
+  will-change:transform;
+  animation:heroBob 2.1s ease-in-out var(--d,0ms) infinite;
+}
+@keyframes heroBob{
+  0%,100%{transform:translateY(0)}
+  50%    {transform:translateY(-11px)}
+}
+.hero-ground{
+  width:17px; height:5px; margin-top:-3px; border-radius:50%;
+  background:radial-gradient(ellipse at center, rgba(23,35,31,.45), rgba(23,35,31,0) 72%);
+  animation:heroGround 2.1s ease-in-out var(--d,0ms) infinite;
+}
+@keyframes heroGround{
+  0%,100%{transform:scale(1);   opacity:.85}
+  50%    {transform:scale(.68); opacity:.4}
+}
+.hero-arrow{
+  display:block; width:25px; height:29px;
+  fill:url(#gradGreen);
+  filter:drop-shadow(0 3px 4px rgba(23,35,31,.32));
+}
+.hero-pin.gold .hero-arrow{width:28px; height:32px; fill:url(#gradGold)}
+.hero-chip{
+  padding:3px 8px; border-radius:7px; white-space:nowrap;
+  font-size:11px; font-weight:600; letter-spacing:-.005em;
+  color:#2a1c05; background:var(--gold);
+  border:1px solid var(--gold-700); box-shadow:var(--shadow-sm);
+}
+/* nothing loops while the preview is off screen */
+.hero-canvas.rest .hero-bob,.hero-canvas.rest .hero-ground{animation-play-state:paused}
+
+/* =============================================================================
+   Campus list
+   ========================================================================== */
+
+.campuses{padding-bottom:clamp(56px,8vw,96px); scroll-margin-top:24px}
+.campuses h2{
+  margin:0 0 22px; font-size:15px; font-weight:650;
+  letter-spacing:.08em; text-transform:uppercase; color:var(--muted);
+}
+
+.grid{display:grid; gap:20px; grid-template-columns:1fr}
 @media(min-width:660px){ .grid{grid-template-columns:repeat(2,1fr)} }
 @media(min-width:980px){ .grid{grid-template-columns:repeat(3,1fr)} }
 
 .card{
   display:flex; flex-direction:column; overflow:hidden;
   background:var(--surface); border:1px solid var(--line);
-  border-radius:15px; box-shadow:var(--shadow-sm);
+  border-radius:16px; box-shadow:var(--shadow-sm);
   color:inherit; text-decoration:none;
-  transition:transform .22s var(--ease), box-shadow .22s var(--ease), border-color .18s;
+  transition:transform .24s var(--ease), box-shadow .24s var(--ease), border-color .18s;
 }
-a.card:hover{transform:translateY(-3px); box-shadow:var(--shadow-lg); border-color:rgba(26,97,82,.5)}
+.card:hover{transform:translateY(-4px); box-shadow:var(--shadow-lg); border-color:rgba(26,97,82,.45)}
 
 .thumb{
   position:relative; aspect-ratio:16/11; overflow:hidden;
   background:#efe6e6; border-bottom:1px solid var(--line);
 }
-.thumb img{width:100%; height:100%; object-fit:cover; display:block; filter:saturate(.88)}
-a.card:hover .thumb img{filter:saturate(1)}
+.thumb img{
+  width:100%; height:100%; object-fit:cover; display:block;
+  filter:saturate(.86); transition:filter .35s var(--ease), transform .5s var(--ease);
+}
+.card:hover .thumb img{filter:saturate(1); transform:scale(1.03)}
 
-/* Placeholder art for campuses whose map has not been drawn yet. */
+/* Placeholder art for a campus whose plan artwork has not arrived yet. */
 .thumb.blank{background:var(--paper); display:grid; place-items:center}
 .thumb.blank svg{width:100%; height:100%; opacity:.5}
 
 .tag{
-  position:absolute; top:10px; left:10px; padding:4px 9px;
+  position:absolute; top:11px; left:11px; padding:4px 10px;
   border-radius:99px; font-size:11px; font-weight:650;
   letter-spacing:.03em; text-transform:uppercase;
   background:rgba(255,253,247,.94); color:var(--green-700);
   box-shadow:var(--shadow-sm);
 }
-.tag.soon{color:var(--muted)}
 
-.card-body{padding:15px 16px 17px; display:flex; flex-direction:column; gap:5px; flex:1}
-.card-body h2{margin:0; font-size:17px; font-weight:660; letter-spacing:-.015em}
-.card-body p{margin:0; font-size:13.5px; color:var(--muted); line-height:1.45}
+.card-body{padding:16px 17px 18px; display:flex; flex-direction:column; flex:1}
+.card-body h3{margin:0; font-size:17.5px; font-weight:660; letter-spacing:-.018em}
+.place{
+  display:flex; align-items:center; gap:5px; margin:5px 0 0;
+  font-size:12.5px; font-weight:550; color:var(--green);
+}
+.place svg{width:12px; height:12px; flex:none}
+.note{margin:9px 0 0; font-size:13.5px; line-height:1.5; color:var(--muted)}
 
 .foot{
-  display:flex; align-items:center; gap:6px; margin-top:auto; padding-top:12px;
-  font-size:13px; font-weight:600; color:var(--green);
+  display:flex; align-items:center; gap:6px; margin-top:auto; padding-top:15px;
+  font-size:13px; font-weight:650; color:var(--green);
 }
-.foot svg{width:14px; height:14px; transition:transform .2s var(--ease)}
-a.card:hover .foot svg{transform:translateX(3px)}
-.foot.muted{color:var(--muted); font-weight:500}
+.foot svg{width:14px; height:14px; transition:transform .25s var(--spring)}
+.card:hover .foot svg{transform:translateX(4px)}
 
-/* ---------- footer ---------- */
-footer{border-top:1px solid var(--line); padding:20px 0 40px; font-size:13px; color:var(--muted)}
+/* ---------- campuses without a map yet ----------
+   Kept visible and honest, but clearly a step below the maps that work. */
+.upcoming{
+  display:flex; flex-wrap:wrap; align-items:center; gap:10px 14px;
+  margin-top:26px; padding:16px 18px;
+  background:var(--surface); border:1px solid var(--line); border-radius:14px;
+}
+.upcoming[hidden]{display:none}
+.upcoming b{font-size:13px; font-weight:650; color:var(--ink)}
+.upcoming ul{display:flex; flex-wrap:wrap; gap:7px; margin:0; padding:0; list-style:none}
+.upcoming li{
+  padding:4px 11px; border-radius:99px;
+  font-size:12.5px; font-weight:550; color:var(--muted);
+  background:var(--paper); border:1px solid var(--line);
+}
+.upcoming .aside{
+  flex:1 1 100%; margin:0; font-size:12.5px; line-height:1.5; color:var(--muted);
+}
+
+/* =============================================================================
+   Arrival
+   ========================================================================== */
+
+.hero-copy > *{animation:rise .8s var(--ease) both}
+.hero-copy h1{animation-delay:.02s}
+.hero-copy .deck{animation-delay:.1s}
+.hero-copy .hero-cta{animation-delay:.18s}
+@keyframes rise{
+  from{opacity:0; transform:translateY(14px)}
+  to  {opacity:1; transform:none}
+}
+
+/* The preview gets the authored entrance: it settles in rather than fading. */
+.hero-map{animation:settle 1s var(--ease) .12s both}
+@keyframes settle{
+  from{opacity:0; transform:translateY(26px) scale(.965)}
+  to  {opacity:1; transform:none}
+}
+
+.card{animation:rise .7s var(--ease) both; animation-delay:calc(.3s + var(--i,0) * .08s)}
+
+@media(prefers-reduced-motion:reduce){
+  .hero-bob,.hero-ground{animation:none; transform:none}
+  .hero-copy > *,.hero-map,.card{animation:none}
+  .hero-cta:hover,.card:hover,.hero-map:hover .hero-stage{transform:none}
+  .card:hover .thumb img{transform:none}
+}

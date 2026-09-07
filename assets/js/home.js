@@ -1,12 +1,16 @@
 /**
- * home.js — builds the campus grid on the index page.
+ * home.js — builds the campus list on the index page.
+ *
+ * A campus with an `href` gets a full card. The rest are named in a quieter
+ * strip underneath, so a campus that has no map yet never looks like one that
+ * does, and never offers a dead link.
  *
  * Requires icons.js and data/campuses.js.
  */
 (function (GSL) {
   'use strict';
 
-  /** A quiet abstract plan, so an unmapped campus still looks designed. */
+  /** A quiet abstract plan, for a campus whose artwork has not arrived yet. */
   var BLANK_PLAN =
     '<svg viewBox="0 0 320 220" aria-hidden="true">' +
       '<rect width="320" height="220" fill="#f4efe4"/>' +
@@ -23,76 +27,101 @@
     '</svg>';
 
   /**
-   * Replace a thumbnail with the placeholder art. Used both for campuses with
-   * no map yet and for a plan image that fails to load.
-   * @param {HTMLElement} thumb
-   * @param {string} label text for the corner tag
-   * @param {boolean} muted true for a campus with no map behind the card
-   */
-  function renderBlankThumb(thumb, label, muted) {
-    thumb.classList.add('blank');
-    thumb.innerHTML = BLANK_PLAN +
-      '<span class="tag' + (muted ? ' soon' : '') + '">' + label + '</span>';
-  }
-
-  /**
-   * Build one campus card. Live campuses become links; the rest are inert
-   * divs, so there is never a dead link to click.
+   * Build one campus card. Every card here links to a working map, so the card
+   * is always an anchor.
    * @param {object} campus an entry from GSL.campuses
-   * @returns {HTMLElement}
+   * @param {number} i position in the grid, for the arrival stagger
+   * @returns {HTMLAnchorElement}
    */
-  function buildCard(campus) {
-    var live = Boolean(campus.href);
-    var card = document.createElement(live ? 'a' : 'div');
+  function buildCard(campus, i) {
+    var card = document.createElement('a');
     card.className = 'card';
-    if (live) card.href = campus.href;
+    card.href = campus.href;
+    card.style.setProperty('--i', i);
 
     var thumb = document.createElement('div');
     thumb.className = 'thumb';
 
-    if (live && campus.thumb) {
+    if (campus.thumb) {
       var img = document.createElement('img');
       img.src = campus.thumb;
       img.alt = 'Plan of the ' + campus.name;
       img.loading = 'lazy';
-      // The artwork for a campus can arrive after its map does.
+      // The plan artwork for a campus can arrive after its map does.
       img.addEventListener('error', function () {
-        renderBlankThumb(thumb, 'Open map', false);
+        thumb.classList.add('blank');
+        thumb.innerHTML = BLANK_PLAN + '<span class="tag">Open map</span>';
       });
       thumb.appendChild(img);
-      thumb.insertAdjacentHTML('beforeend', '<span class="tag">Open map</span>');
     } else {
-      renderBlankThumb(thumb, 'Coming soon', true);
+      thumb.classList.add('blank');
+      thumb.innerHTML = BLANK_PLAN;
     }
+    thumb.insertAdjacentHTML('beforeend', '<span class="tag">Open map</span>');
 
     var body = document.createElement('div');
     body.className = 'card-body';
 
-    var heading = document.createElement('h2');
-    heading.textContent = campus.name;
+    var name = document.createElement('h3');
+    name.textContent = campus.name;
 
     var place = document.createElement('p');
-    place.textContent = campus.place;
+    place.className = 'place';
+    place.innerHTML = GSL.icons.PIN;
+    place.appendChild(document.createTextNode(campus.place));
 
     var note = document.createElement('p');
+    note.className = 'note';
     note.textContent = campus.note;
 
     var foot = document.createElement('span');
-    if (live) {
-      foot.className = 'foot';
-      foot.innerHTML = 'View campus map ' + GSL.icons.GO;
-    } else {
-      foot.className = 'foot muted';
-      foot.textContent = 'Not yet available';
-    }
+    foot.className = 'foot';
+    foot.innerHTML = 'View campus map ' + GSL.icons.GO;
 
-    body.append(heading, place, note, foot);
+    body.append(name, place, note, foot);
     card.append(thumb, body);
     return card;
   }
 
+  /**
+   * Name the campuses that have no map yet, without pretending they do.
+   * @param {HTMLElement} host
+   * @param {object[]} campuses
+   */
+  function renderUpcoming(host, campuses) {
+    if (!campuses.length) return;
+
+    var lead = document.createElement('b');
+    lead.textContent = 'Being mapped next';
+
+    var list = document.createElement('ul');
+    campuses.forEach(function (campus) {
+      var item = document.createElement('li');
+      item.textContent = campus.name;
+      list.appendChild(item);
+    });
+
+    var aside = document.createElement('p');
+    aside.className = 'aside';
+    aside.textContent = 'Building names and details are updated as the school confirms them.';
+
+    host.append(lead, list, aside);
+    host.hidden = false;
+  }
+
+  var mapped = GSL.campuses.filter(function (c) { return Boolean(c.href); });
+  var upcoming = GSL.campuses.filter(function (c) { return !c.href; });
+
   var grid = document.getElementById('grid');
-  GSL.campuses.forEach(function (campus) {
-    grid.appendChild(buildCard(campus));
-  });
+  mapped.forEach(function (campus, i) { grid.appendChild(buildCard(campus, i)); });
+
+  renderUpcoming(document.getElementById('upcoming'), upcoming);
+
+  // The hero pointers loop, so let them rest once the preview scrolls away.
+  var heroCanvas = document.getElementById('heroCanvas');
+  if (heroCanvas && window.IntersectionObserver) {
+    new IntersectionObserver(function (entries) {
+      heroCanvas.classList.toggle('rest', !entries[0].isIntersecting);
+    }, { threshold: 0 }).observe(heroCanvas);
+  }
 }(window.GSL));
