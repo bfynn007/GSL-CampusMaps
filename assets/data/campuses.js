@@ -13,7 +13,7 @@ window.GSL.campuses = [
   {
     name: 'Makola Campus',
     place: 'Accra',
-    note: 'The main campus off Independence Avenue. 15 locations, plus the clinic and every washroom.',
+    note: 'Explore the main campus off Independence Avenue with an interactive map.',
     classTypes: ['Pre-Bar', 'Part II', 'Post Call'],
     href: 'makola-campus-map.html',
     // The wider precinct view, matching how KNUST and GIMPA are shown here.
@@ -23,7 +23,7 @@ window.GSL.campuses = [
   {
     name: 'KNUST Campus',
     place: 'Kumasi',
-    note: 'Three class venues in the Ayeduase and Mango Road precinct.',
+    note: 'Find three lecture venues across the Ayeduase and Mango Road precincts.',
     classTypes: ['Pre-Bar', 'Part II'],
     href: 'knust-campus-map.html',
     thumb: 'assets/img/knust/knust-precinct-plan.webp'
@@ -38,7 +38,7 @@ window.GSL.campuses = [
   {
     name: 'GIMPA Campus',
     place: 'Accra',
-    note: 'Part One and Part Two classes, the canteen and the washrooms on the GIMPA law campus.',
+    note: 'View the locations of the lecture halls, along with other essential campus facilities.',
     classTypes: ['Pre-Bar', 'Part II'],
     href: 'gimpa-campus-map.html',
     thumb: 'assets/img/gimpa/gimpa-precinct-plan.webp'

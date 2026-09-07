@@ -126,19 +126,6 @@
 .fact.clinic{color:#8a251f; background:#fbeae8}
 .fact.wc{color:#1d4b6d; background:#e8f1f8}
 
-.rooms{margin:0; padding:0; list-style:none; font-size:13.5px}
-.rooms li{
-  padding:5px 0 5px 15px; position:relative; line-height:1.4;
-  border-top:1px solid rgba(222,216,203,.65);
-}
-.rooms li:first-child{border-top:0}
-.rooms li::before{
-  content:""; position:absolute; left:2px; top:12px;
-  width:5px; height:5px; border-radius:99px; background:var(--line);
-}
-.rooms li.match{font-weight:600; color:var(--gold-700)}
-.rooms li.match::before{background:var(--gold)}
-
 .close{width:28px; height:28px; border-radius:7px}
 
 /* ---------- narrow screens ---------- */

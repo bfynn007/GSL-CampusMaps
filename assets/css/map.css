@@ -225,6 +225,20 @@ main{padding:18px 0 60px}
   letter-spacing:.085em; color:var(--muted); margin-bottom:4px;
 }
 
+/* What is inside a building. Used by both map types. */
+.rooms{margin:0; padding:0; list-style:none; font-size:13.5px}
+.rooms li{
+  padding:5px 0 5px 15px; position:relative; line-height:1.4;
+  border-top:1px solid rgba(222,216,203,.65);
+}
+.rooms li:first-child{border-top:0}
+.rooms li::before{
+  content:""; position:absolute; left:2px; top:12px;
+  width:5px; height:5px; border-radius:99px; background:var(--line);
+}
+.rooms li.match{font-weight:600; color:var(--gold-700)}
+.rooms li.match::before{background:var(--gold)}
+
 .close{
   position:absolute; top:11px; right:11px;
   display:grid; place-items:center; width:29px; height:29px;

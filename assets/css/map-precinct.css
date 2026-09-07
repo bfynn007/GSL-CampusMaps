@@ -62,11 +62,12 @@
    Padding lives on .pad so the photograph can run edge to edge. */
 .info{padding:0 0 15px; overflow:hidden; overflow-y:auto}
 .pad{padding:15px 17px 0}
-/* The illustrations are square, so declaring the ratio reserves the right
-   space before the file arrives. Without it the card is measured short on a
-   fresh load and gets anchored as though it were, which clips it. */
+/* Declaring a ratio reserves the right space before the file arrives; without
+   it the card is measured short on a fresh load and anchored as though it
+   were, which clips it. Letterboxed rather than square so a card carrying a
+   long list of rooms still fits inside the map. */
 .shot{
-  display:block; width:100%; aspect-ratio:1; object-fit:cover;
+  display:block; width:100%; aspect-ratio:16/10; object-fit:cover;
   background:var(--paper); border-bottom:1px solid var(--line);
 }
 .shot.missing{display:none}   /* set by the script when the artwork is absent */

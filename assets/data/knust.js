@@ -16,8 +16,15 @@ window.GSL.campus = {
       where: 'A standalone building with a pitched roof, set back from Mango Road among the trees, north of the dense hostel blocks.',
       classes: [
         { day: 'Wednesday and Thursday', what: 'Pre-Bar class' },
-        { what: 'Part Two classes' },
-        { what: 'Post Call classes' }
+        { what: 'Part Two classes' }
+      ],
+      rooms: [
+        'Lecture Hall, ground floor',
+        'Two Lecture Halls, first floor',
+        'Library, first floor',
+        'Student Washroom, ground floor',
+        'Two Student Washrooms, first floor',
+        'Staff Washroom, ground floor'
       ],
       gps: '6.6791449,-1.5641091'
     },

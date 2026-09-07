@@ -149,6 +149,11 @@
             }).join('') +
             '</ul>'
           : '') +
+        (place.rooms
+          ? '<h3>Inside this building</h3><ul class="rooms">' +
+            place.rooms.map(function (room) { return '<li>' + esc(room) + '</li>'; }).join('') +
+            '</ul>'
+          : '') +
         '<p class="where"><b>How to find it</b>' + esc(place.where) + '</p>' +
         (place.gps
           ? '<p class="coords"><b>Coordinates</b><span>' + esc(place.gps.replace(',', ', ')) + '</span></p>' +
