@@ -51,6 +51,7 @@ window.GSL.campuses = [
     name: 'ACCE Campus',
     place: 'Accra',
     note: 'Find the auditorium, GSL offices, library and canteen on the Accra College of Education grounds.',
+    classTypes: ['Pre-Bar'],
     href: 'acce-campus-map.html',
     thumb: 'assets/img/acce/acce-precinct-plan.webp'
   }

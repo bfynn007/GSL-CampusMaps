@@ -29,6 +29,9 @@ window.GSL.campus = {
       road: 'Accra College of Education, East Legon',
       x: 50.0, y: 51.0, r: '10%',
       where: 'The central block with the long red roof, in the middle of the college grounds. The GSL administration offices are in the same building.',
+      classes: [
+        { what: 'Pre-Bar classes' }
+      ],
       gps: '5.65785,-0.16108'
     },
 

@@ -112,8 +112,6 @@ more than one map page in `map.css`.
   the building's own `gps`. A coordinate cannot separate two floors; the floor
   and the side of the corridor live in `sub` and `where` instead. Pin
   positions are spread across the roof only to keep them legible.
-- ACCE has no `classTypes` in `campuses.js` yet, so its row on the campus list
-  shows no class chips while Makola, KNUST, GIMPA and UPSA do.
 - Neither UPSA nor ACCE has building illustrations, so no venue there carries a
   `shot`; the card renders without an image until the artwork arrives.
 - In the page header, `.bar` sets its own vertical padding and so cancels the
