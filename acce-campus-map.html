@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ACCE Campus Map</title>
+<meta name="description" content="Interactive map of the Ghana School of Law campus at Accra College of Education, East Legon.">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/map.css">
+<link rel="stylesheet" href="assets/css/map-precinct.css">
+<script src="assets/js/icons.js" defer></script>
+<script src="assets/js/map-core.js" defer></script>
+<script src="assets/data/acce.js" defer></script>
+<script src="assets/js/precinct-map.js" defer></script>
+</head>
+<body>
+
+<!-- Shared gradients for the pointer bodies. Referenced by fill:url(#id) in CSS. -->
+<svg width="0" height="0" aria-hidden="true" style="position:absolute">
+  <defs>
+    <linearGradient id="gradGreen" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2c7d6a"/><stop offset="100%" stop-color="#124a3d"/>
+    </linearGradient>
+    <linearGradient id="gradGreenLit" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#3d9a84"/><stop offset="100%" stop-color="#17604f"/>
+    </linearGradient>
+    <linearGradient id="gradGold" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#eeb254"/><stop offset="100%" stop-color="#b1741f"/>
+    </linearGradient>
+  </defs>
+</svg>
+
+<header>
+  <div class="wrap bar">
+    <a class="back" href="campuses.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M19 12H6M11 5.5L5 12l6 6.5"/>
+      </svg>
+      <span>Campuses</span>
+    </a>
+    <div class="title"><h1>ACCE Campus, Accra</h1></div>
+
+    <button class="lbl-btn" id="btnLabels" type="button" aria-pressed="true" title="Show or hide the arrows and names">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M3 8.4V5.5a2 2 0 0 1 2-2h2.9a2 2 0 0 1 1.4.6l10 10a2 2 0 0 1 0 2.8l-4 4a2 2 0 0 1-2.8 0l-10-10a2 2 0 0 1-.6-1.4z"/>
+        <circle cx="7.6" cy="7.6" r="1.4"/>
+      </svg>
+      <span class="label">Labels</span>
+    </button>
+
+    <div class="browse">
+      <button class="browse-btn" id="browseBtn" type="button" aria-expanded="false" aria-controls="browsePanel" aria-haspopup="listbox">
+        <svg class="lead" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/>
+        </svg>
+        <span class="label">Locations</span>
+        <span class="badge" id="badge">0</span>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M6 9l6 6 6-6"/>
+        </svg>
+      </button>
+
+      <div class="panel" id="browsePanel" hidden>
+        <ul id="list" role="listbox" aria-label="Campus locations"></ul>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <main>
+    <p class="hint">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M9 11.5V4.8a1.8 1.8 0 1 1 3.6 0v5.4"/>
+        <path d="M12.6 10.6V9a1.7 1.7 0 1 1 3.4 0v1.9"/>
+        <path d="M16 11.2v-.7a1.7 1.7 0 1 1 3.4 0V15a6 6 0 0 1-6 6h-1.7a6 6 0 0 1-5.2-3l-2.1-3.6a1.8 1.8 0 0 1 3-2l1.6 2"/>
+      </svg>
+      Click an arrow to see details about that location.
+      <a class="campus-gps" href="https://www.google.com/maps?q=5.65785,-0.16108"
+         target="_blank" rel="noopener">Locate the campus on Google Map</a>
+    </p>
+
+    <div class="stage">
+      <div class="canvas" id="canvas">
+        <img class="plan" id="plan" src="assets/img/acce/acce-campus-plan.webp" alt="Illustrated plan of the Accra College of Education campus">
+        <!-- viewBox must match the coordinate space the landmark data uses. -->
+        <svg class="landmarks" id="landmarks" viewBox="0 0 1254 1254" preserveAspectRatio="none" aria-hidden="true"></svg>
+        <div class="pins" id="pins"></div>
+        <div class="info" id="info" role="dialog" aria-labelledby="info-title" hidden></div>
+      </div>
+    </div>
+  </main>
+</div>
+
+</body>
+</html>
