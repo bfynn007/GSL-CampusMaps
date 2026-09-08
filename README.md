@@ -24,27 +24,30 @@ index.html                  campus picker
 makola-campus-map.html      Makola campus, Accra
 gimpa-campus-map.html       GIMPA campus, Accra
 knust-campus-map.html       KNUST campus, Kumasi
+upsa-campus-map.html        UPSA campus, Accra
 
 assets/
   css/
     base.css                design tokens, reset, page shell   (every page)
     home.css                the campus picker                  (index only)
-    map.css                 the shared map shell               (all 3 map pages)
+    map.css                 the shared map shell               (all 4 map pages)
     map-makola.css          traced footprints, service layers  (Makola only)
-    map-precinct.css        halos, landmark labels             (GIMPA + KNUST)
+    map-precinct.css        halos, landmark labels     (GIMPA + KNUST + UPSA)
   js/
     icons.js                inline SVG icon set                (every page)
     map-core.js             behaviour shared by all map pages
     home.js                 builds the campus grid
     makola-map.js           the Makola page controller
-    precinct-map.js         the GIMPA and KNUST controller (one file, both pages)
+    precinct-map.js         the GIMPA / KNUST / UPSA controller (one file, 3 pages)
   data/
     campuses.js             the campus list on the index page
     makola.js               Makola buildings, rooms and services
     gimpa.js                GIMPA venues
     knust.js                KNUST venues and landmark labels
+    upsa.js                 UPSA venues
   img/
     makola/ gimpa/ knust/   campus plans and building illustrations
+    upsa/
 ```
 
 **Content lives in `assets/data/`, behaviour lives in `assets/js/`.** Adding a
@@ -52,14 +55,14 @@ building or fixing a room name means editing one data file and nothing else.
 
 ### The two kinds of map
 
-| | Makola | GIMPA and KNUST |
+| | Makola | GIMPA, KNUST and UPSA |
 |---|---|---|
 | Buildings marked by | traced polygon footprints | a soft halo under the pointer |
 | Coordinates | pixels in the plan's own space | percentages of the plan image |
 | Dropdown | searches buildings **and** rooms | lists venues |
 | Extras | clinic and washroom overlay layers | class times, photo, GPS link |
 
-GIMPA and KNUST are the same page driven by different data, so they share
+GIMPA, KNUST and UPSA are the same page driven by different data, so they share
 `precinct-map.js` and `map-precinct.css`. Makola is different enough to warrant
 its own controller, but still uses the shared shell.
 
@@ -103,7 +106,14 @@ more than one map page in `map.css`.
 - The GIMPA building illustrations (`assets/img/gimpa/*.webp`, other than the
   plan) have not been drawn yet. The details card detects this and hides the
   image, so the page is correct either way.
-- UPSA and ACCE have no maps yet and show as placeholders on the index.
+- UPSA is one building, not a spread of them, so four of its five venues share
+  the building's own `gps`. A coordinate cannot separate two floors; the floor
+  and the side of the corridor live in `sub` and `where` instead. Pin
+  positions are spread across the roof only to keep them legible.
+- UPSA has no building illustrations. Its venues carry no `shot` field at all,
+  so the card simply renders without an image; add the field per venue as the
+  artwork arrives.
+- ACCE has no map yet and shows as a placeholder in the campus list.
 - In the page header, `.bar` sets its own vertical padding and so cancels the
   horizontal padding `.wrap` would give it. The header content therefore sits
   flush to the screen edge on phones and about 20px wider than the map box on

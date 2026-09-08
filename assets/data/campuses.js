@@ -31,9 +31,13 @@ window.GSL.campuses = [
   {
     name: 'UPSA Campus',
     place: 'Accra',
-    note: 'Map not yet available.',
-    href: null,
-    thumb: null
+    note: 'Find the lecture halls, canteen and admin office inside the SRC Students Center.',
+    classTypes: ['Pre-Bar', 'Part II'],
+    href: 'upsa-campus-map.html',
+    // The wider precinct view, matching the other campuses here. The map page
+    // itself uses the close-up of the building, the whole campus being the one
+    // block.
+    thumb: 'assets/img/upsa/upsa-precinct-plan.webp'
   },
   {
     name: 'GIMPA Campus',
@@ -51,3 +55,4 @@ window.GSL.campuses = [
     thumb: null
   }
 ];
+
