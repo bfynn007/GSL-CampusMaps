@@ -6,6 +6,10 @@ venue without having to ask anyone.
 
 Static HTML, CSS and JavaScript. No build step, no dependencies, no backend.
 
+## Project documentation
+
+- [Project brief](docs/project-brief.md)
+
 ## Status
 
 All five campus maps are live.
