@@ -31,15 +31,11 @@
 }
 
 /* ---------- pointer chip ----------
-   Narrow, because fifteen pointers sit close together here. Semi-transparent
-   so the roof shows through; the backdrop blur is what keeps 11.5px text
-   legible over a busy aerial photograph. */
+   Narrow, because fifteen pointers sit close together here. No plate behind
+   the name — the roofs underneath stay visible; the halo set in map.css is
+   what keeps 11.5px text legible over a busy aerial photograph. */
 .chip{
   max-width:96px; padding:3px 8px;
-  background:rgba(255,253,247,.62);
-  -webkit-backdrop-filter:blur(5px) saturate(1.15);
-  backdrop-filter:blur(5px) saturate(1.15);
-  border:1px solid rgba(255,253,247,.5);
 }
 
 /* ---------- selection ring on the ground ---------- */
@@ -100,12 +96,12 @@
 
 .pin.tone-red  .arrow .body{fill:url(#gradRed)}
 .pin.tone-blue .arrow .body{fill:url(#gradBlue)}
-.pin.tone-red  .chip{background:rgba(251,234,232,.72); color:#7d221c; border-color:rgba(226,179,174,.7)}
-.pin.tone-blue .chip{background:rgba(232,241,248,.72); color:#1a4467; border-color:rgba(169,200,221,.7)}
+.pin.tone-red  .chip{color:#7d221c}
+.pin.tone-blue .chip{color:#1a4467}
 .pin.tone-red .ground,
 .pin.tone-blue .ground{background:radial-gradient(ellipse at center, rgba(23,35,31,.5), rgba(23,35,31,0) 72%)}
-.pin.tone-red:hover  .chip,.pin.tone-red.on  .chip{background:#b3352d; color:#fff; border-color:#8a251f}
-.pin.tone-blue:hover .chip,.pin.tone-blue.on .chip{background:#2b6b96; color:#fff; border-color:#1d4b6d}
+.pin.tone-red:hover  .chip,.pin.tone-red.on  .chip{background:#b3352d; color:#fff; border-color:#8a251f; text-shadow:none}
+.pin.tone-blue:hover .chip,.pin.tone-blue.on .chip{background:#2b6b96; color:#fff; border-color:#1d4b6d; text-shadow:none}
 .pin.tone-red.on .arrow .body,.pin.tone-blue.on .arrow .body{stroke-width:2.2}
 .pin.tone-red  .ring{border-color:#b3352d}
 .pin.tone-blue .ring{border-color:#2b6b96}

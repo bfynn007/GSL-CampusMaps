@@ -50,12 +50,11 @@
 @media(max-width:620px){ .landmarks{display:none} }   /* too small to read */
 
 /* ---------- pointer chip ----------
-   Wider and near-opaque: these venues are far apart, and the illustrated plan
-   is busy enough that a translucent chip would not read. */
+   Wider than Makola's, because these venues are far apart and carry longer
+   names. Like Makola it sits on the plan with no plate behind it, so nothing
+   underneath is covered; the halo set in map.css does the legibility work. */
 .chip{
   max-width:150px;
-  background:rgba(255,253,247,.96);
-  border:1px solid rgba(222,216,203,.9);
 }
 
 /* ---------- details card ----------

@@ -145,14 +145,25 @@ main{padding:18px 0 60px}
 .arrow .eye{fill:#fffdf7; opacity:.95}
 
 /* Full building names, wrapped to keep each chip narrow enough not to
-   collide with its neighbours. Each variant sets its own width and backdrop. */
+   collide with its neighbours. Each variant sets its own width.
+
+   At rest the name carries no plate at all — a panel behind fifteen labels
+   hides more of the plan than the labels are worth. Legibility comes from a
+   tight paper-coloured halo painted around the glyphs instead, which costs
+   only the few pixels the letters themselves occupy. The weight is up a step
+   because text with no card under it needs the extra body. */
 .chip{
   padding:4px 9px; border-radius:7px;
   text-align:center; text-wrap:balance; line-height:1.22;
-  font-size:11.5px; font-weight:600; letter-spacing:-.005em; color:var(--ink);
-  box-shadow:var(--shadow-sm);
+  font-size:11.5px; font-weight:650; letter-spacing:-.005em; color:var(--ink);
+  background:none; border-color:transparent;
+  text-shadow:
+     0   1px 2px rgba(255,253,247,.95),  0 -1px 2px rgba(255,253,247,.95),
+     1px 0   2px rgba(255,253,247,.95), -1px 0   2px rgba(255,253,247,.95),
+     0   0   6px rgba(255,253,247,.85);
   transition:background-color .2s var(--ease), color .2s var(--ease),
-             border-color .2s, box-shadow .28s var(--ease), transform .3s var(--spring);
+             border-color .2s, box-shadow .28s var(--ease),
+             text-shadow .2s var(--ease), transform .3s var(--spring);
 }
 
 /* hover / keyboard focus: bounce faster, and light the chip up */
@@ -161,7 +172,7 @@ main{padding:18px 0 60px}
 .pin:hover .ground,.pin:focus-visible .ground,.pin.hot .ground{animation-duration:1.05s}
 .pin:hover .chip,.pin:focus-visible .chip,.pin.hot .chip{
   transform:scale(1.08); background:var(--green); color:#fffdf7;
-  border-color:var(--green-700); box-shadow:var(--shadow-md);
+  border-color:var(--green-700); box-shadow:var(--shadow-md); text-shadow:none;
 }
 .pin:hover .arrow .body,.pin:focus-visible .arrow .body,.pin.hot .arrow .body{fill:url(#gradGreenLit)}
 .pin:focus-visible{outline:none}
@@ -181,7 +192,7 @@ main{padding:18px 0 60px}
 .pin.on .arrow .body{fill:url(#gradGold); stroke:#fffdf7}
 .pin.on .chip{
   transform:scale(1.08); background:var(--gold); color:#2a1c05;
-  border-color:var(--gold-700); box-shadow:var(--shadow-md);
+  border-color:var(--gold-700); box-shadow:var(--shadow-md); text-shadow:none;
 }
 
 /* nothing loops while the map is off screen */
