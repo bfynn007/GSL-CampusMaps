@@ -13,7 +13,7 @@
 <script src="assets/data/makola.js" defer></script>
 <script src="assets/js/makola-map.js" defer></script>
 </head>
-<body>
+<body class="campus-makola">
 
 <!-- Shared gradients for the pointer bodies. Referenced by fill:url(#id) in CSS. -->
 <svg width="0" height="0" aria-hidden="true" style="position:absolute">
@@ -26,6 +26,12 @@
     </linearGradient>
     <linearGradient id="gradGold" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0%" stop-color="#eeb254"/><stop offset="100%" stop-color="#b1741f"/>
+    </linearGradient>
+    <linearGradient id="gradPin" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#20a7a5"/><stop offset="100%" stop-color="#005b62"/>
+    </linearGradient>
+    <linearGradient id="gradPinLit" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#42c2bf"/><stop offset="100%" stop-color="#007c83"/>
     </linearGradient>
     <linearGradient id="gradRed" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0%" stop-color="#d9584f"/><stop offset="100%" stop-color="#982c25"/>
@@ -97,7 +103,7 @@
         <!-- .layer crops the plan's empty margin while keeping every
              coordinate in the original 1512 x 1036 space. -->
         <div class="layer">
-          <img src="assets/img/makola/makola-campus-plan.webp" alt="Aerial plan of the Makola campus">
+          <img src="assets/img/makola/makola-campus-plan-updated-v4.png" alt="Aerial plan of the Makola campus">
           <svg class="shapes" id="shapes" viewBox="0 0 1512 1036" aria-hidden="true"></svg>
           <div class="pins" id="pins"></div>
           <div class="svcpins" id="svcpins" hidden></div>

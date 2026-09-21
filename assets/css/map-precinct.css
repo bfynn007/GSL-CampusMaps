@@ -17,17 +17,17 @@
 .halo{
   position:absolute; width:var(--r,12%); aspect-ratio:1;
   transform:translate(-50%,-50%); border-radius:50%; pointer-events:none;
-  background:radial-gradient(circle, rgba(26,97,82,.30), rgba(26,97,82,.10) 55%, rgba(26,97,82,0) 72%);
+  background:radial-gradient(circle, rgba(var(--marker-rgb),.30), rgba(var(--marker-rgb),.10) 55%, rgba(var(--marker-rgb),0) 72%);
   opacity:0; transition:opacity .25s var(--ease);
 }
 .halo.hot{opacity:1}
 .halo.on{
   opacity:1;
-  background:radial-gradient(circle, rgba(210,148,51,.52), rgba(210,148,51,.18) 55%, rgba(210,148,51,0) 72%);
+  background:radial-gradient(circle, rgba(var(--marker-rgb),.52), rgba(var(--marker-rgb),.18) 55%, rgba(var(--marker-rgb),0) 72%);
 }
 .halo.on::after{
   content:""; position:absolute; inset:14%; border-radius:50%;
-  border:2.5px solid var(--gold); animation:pulse 1.9s var(--ease) infinite;
+  border:2.5px solid var(--marker); animation:pulse 1.9s var(--ease) infinite;
 }
 @keyframes pulse{
   0%  {transform:scale(.72); opacity:.95}

@@ -20,14 +20,14 @@
   fill:transparent; stroke:transparent; stroke-width:4; stroke-linejoin:round;
   cursor:pointer; transition:fill .2s var(--ease), stroke .2s var(--ease);
 }
-.shape.hot{fill:rgba(26,97,82,.22); stroke:rgba(26,97,82,.9)}
-.shape.on{fill:rgba(210,148,51,.36); stroke:var(--gold); stroke-width:5}
+.shape.hot{fill:rgba(var(--marker-rgb),.22); stroke:rgba(var(--marker-rgb),.9)}
+.shape.on{fill:rgba(var(--marker-rgb),.36); stroke:var(--marker); stroke-width:5}
 
 /* picked from the dropdown: two bright pulses so it is impossible to miss */
 .shape.flash{animation:flash 1.05s var(--ease) 2}
 @keyframes flash{
-  0%,100%{fill:rgba(210,148,51,.36); stroke-width:5}
-  45%    {fill:rgba(238,178,84,.72); stroke-width:8}
+  0%,100%{fill:rgba(var(--marker-rgb),.36); stroke-width:5}
+  45%    {fill:rgba(var(--marker-rgb),.72); stroke-width:8}
 }
 
 /* ---------- pointer chip ----------
@@ -41,7 +41,7 @@
 /* ---------- selection ring on the ground ---------- */
 .ring{
   position:absolute; left:50%; bottom:-7px; width:22px; height:22px;
-  margin-left:-11px; border-radius:50%; border:2px solid var(--gold);
+  margin-left:-11px; border-radius:50%; border:2px solid var(--marker);
   opacity:0; pointer-events:none;
 }
 .pin.on .ring{animation:ping 1.9s var(--ease) infinite}
@@ -96,12 +96,18 @@
 
 .pin.tone-red  .arrow .body{fill:url(#gradRed)}
 .pin.tone-blue .arrow .body{fill:url(#gradBlue)}
+.pin.tone-red:hover .arrow .body,.pin.tone-red:focus-visible .arrow .body,
+.pin.tone-red.hot .arrow .body,.pin.tone-red.on .arrow .body{fill:url(#gradRed)}
+.pin.tone-blue:hover .arrow .body,.pin.tone-blue:focus-visible .arrow .body,
+.pin.tone-blue.hot .arrow .body,.pin.tone-blue.on .arrow .body{fill:url(#gradBlue)}
 .pin.tone-red  .chip{color:#7d221c}
 .pin.tone-blue .chip{color:#1a4467}
 .pin.tone-red .ground,
 .pin.tone-blue .ground{background:radial-gradient(ellipse at center, rgba(23,35,31,.5), rgba(23,35,31,0) 72%)}
-.pin.tone-red:hover  .chip,.pin.tone-red.on  .chip{background:#b3352d; color:#fff; border-color:#8a251f; text-shadow:none}
-.pin.tone-blue:hover .chip,.pin.tone-blue.on .chip{background:#2b6b96; color:#fff; border-color:#1d4b6d; text-shadow:none}
+.pin.tone-red:hover .chip,.pin.tone-red:focus-visible .chip,
+.pin.tone-red.hot .chip,.pin.tone-red.on .chip{background:#b3352d; color:#fff; border-color:#8a251f; text-shadow:none}
+.pin.tone-blue:hover .chip,.pin.tone-blue:focus-visible .chip,
+.pin.tone-blue.hot .chip,.pin.tone-blue.on .chip{background:#2b6b96; color:#fff; border-color:#1d4b6d; text-shadow:none}
 .pin.tone-red.on .arrow .body,.pin.tone-blue.on .arrow .body{stroke-width:2.2}
 .pin.tone-red  .ring{border-color:#b3352d}
 .pin.tone-blue .ring{border-color:#2b6b96}

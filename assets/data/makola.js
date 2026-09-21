@@ -30,10 +30,10 @@ window.GSL.campus = {
     },
 
     'entrance-construction': {
-      name: 'Entrance Construction', near: 'Main Entrance', pin: [690, 150],
-      shape: '644,52 722,55 776,126 754,207 683,222 616,183 611,105',
-      desc: 'An ongoing construction site. Access is restricted.',
-      also: ['Silver roof', 'Building site']
+      name: 'Entrance Construction', near: 'Main Entrance', pin: [690, 106],
+      shape: '674,44 730,78 720,116 687,131 649,100 650,75',
+      desc: 'A smaller ongoing construction site in the upper entrance corner. Access is restricted.',
+      also: ['Brown roof', 'Building site']
     },
 
     'shaded-seating-area': {
@@ -41,6 +41,13 @@ window.GSL.campus = {
       shape: '624,220 656,215 742,287 720,322 678,310 612,250',
       desc: 'Trees and shaded seating close to the entrance, between the car park and the construction area.',
       also: ['Trees', 'Benches', 'Rest area']
+    },
+
+    'car-park': {
+      name: 'Car Park', near: 'Shaded Seating Area', pin: [720, 182],
+      shape: '624,155 641,138 748,139 811,193 798,207 748,231 731,248',
+      desc: 'Open parking on the entrance forecourt: the row of bays beside the Shaded Seating Area and the second row on the far side of the low wall, with the driveway between them.',
+      also: ['Parking area', 'Parking bays', 'Visitor parking']
     },
 
     'main-car-park': {
@@ -101,7 +108,7 @@ window.GSL.campus = {
         'Help Desk, ground floor',
         "Deputy Registrar's Office, ground floor",
         'Staff Common Room, ground floor',
-        'Finance Unit, first floor',
+        'Finance Unit, ground floor, in the long rectangular wing',
         'Part Two Classroom, first floor',
         'Post Call Classroom, first floor',
         'Walkway to the Library & Academic Block, first floor'

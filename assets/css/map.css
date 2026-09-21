@@ -4,6 +4,39 @@
    map-makola.css (traced building footprints) or map-precinct.css (halos).
    ========================================================================== */
 
+/* Each campus uses a marker colour chosen for contrast with its own plan.
+   These variables also drive the linked hover and selected highlights. */
+:root{
+  --marker:#5b4bdb;
+  --marker-strong:#4032a3;
+  --marker-rgb:91,75,219;
+}
+.campus-acce{
+  --marker:#2563eb;
+  --marker-strong:#1d4ed8;
+  --marker-rgb:37,99,235;
+}
+.campus-gimpa{
+  --marker:#d94f3d;
+  --marker-strong:#a93229;
+  --marker-rgb:217,79,61;
+}
+.campus-knust{
+  --marker:#6d4aff;
+  --marker-strong:#4932b3;
+  --marker-rgb:109,74,255;
+}
+.campus-makola{
+  --marker:#007c83;
+  --marker-strong:#005b62;
+  --marker-rgb:0,124,131;
+}
+.campus-upsa{
+  --marker:#673ab7;
+  --marker-strong:#45227f;
+  --marker-rgb:103,58,183;
+}
+
 /* ---------- header ---------- */
 header{
   position:sticky; top:0; z-index:60;
@@ -141,7 +174,7 @@ main{padding:18px 0 60px}
   50%    {transform:scale(.66); opacity:.4}
 }
 .arrow{display:block; width:28px; height:32px; filter:drop-shadow(0 3px 4px rgba(23,35,31,.33))}
-.arrow .body{fill:url(#gradGreen); stroke:#fffdf7; stroke-width:1.6}
+.arrow .body{fill:url(#gradPin); stroke:#fffdf7; stroke-width:1.6}
 .arrow .eye{fill:#fffdf7; opacity:.95}
 
 /* Full building names, wrapped to keep each chip narrow enough not to
@@ -171,12 +204,12 @@ main{padding:18px 0 60px}
 .pin:hover .bob,.pin:focus-visible .bob,.pin.hot .bob,
 .pin:hover .ground,.pin:focus-visible .ground,.pin.hot .ground{animation-duration:1.05s}
 .pin:hover .chip,.pin:focus-visible .chip,.pin.hot .chip{
-  transform:scale(1.08); background:var(--green); color:#fffdf7;
-  border-color:var(--green-700); box-shadow:var(--shadow-md); text-shadow:none;
+  transform:scale(1.08); background:var(--marker-strong); color:#fffdf7;
+  border-color:var(--marker); box-shadow:var(--shadow-md); text-shadow:none;
 }
-.pin:hover .arrow .body,.pin:focus-visible .arrow .body,.pin.hot .arrow .body{fill:url(#gradGreenLit)}
+.pin:hover .arrow .body,.pin:focus-visible .arrow .body,.pin.hot .arrow .body{fill:url(#gradPinLit)}
 .pin:focus-visible{outline:none}
-.pin:focus-visible .chip{outline:2px solid var(--green); outline-offset:3px}
+.pin:focus-visible .chip{outline:2px solid var(--marker); outline-offset:3px}
 
 /* selected: the pointer stops bouncing and plants itself. Closing the card
    puts it back in the loop. */
@@ -189,10 +222,10 @@ main{padding:18px 0 60px}
   100%{transform:translateY(0)}
 }
 .pin.on .arrow{width:32px; height:37px; filter:drop-shadow(0 4px 7px rgba(23,35,31,.38))}
-.pin.on .arrow .body{fill:url(#gradGold); stroke:#fffdf7}
+.pin.on .arrow .body{fill:url(#gradPinLit); stroke:#fffdf7}
 .pin.on .chip{
-  transform:scale(1.08); background:var(--gold); color:#2a1c05;
-  border-color:var(--gold-700); box-shadow:var(--shadow-md); text-shadow:none;
+  transform:scale(1.08); background:var(--marker-strong); color:#fffdf7;
+  border-color:var(--marker); box-shadow:var(--shadow-md); text-shadow:none;
 }
 
 /* nothing loops while the map is off screen */
