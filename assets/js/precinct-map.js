@@ -14,6 +14,7 @@
   var esc = map.esc;
   var PLACES = GSL.campus.places;
   var LANDMARKS = GSL.campus.landmarks;
+  var NOTICES = GSL.campus.notices || {};
   var entries = Object.entries(PLACES);
 
   var canvas = document.getElementById('canvas');
@@ -24,6 +25,7 @@
   var badge = document.getElementById('badge');
 
   var selected = null;
+  var activeNotice = null;
 
   var pinOf = function (id) { return pins.querySelector('.pin[data-id="' + id + '"]'); };
   var haloOf = function (id) { return pins.querySelector('[data-halo="' + id + '"]'); };
@@ -117,12 +119,57 @@
   }
 
   function clear() {
-    if (!selected) return;
-    deselect(selected);
-    selected = null;
+    if (selected) {
+      deselect(selected);
+      selected = null;
+    }
+    if (activeNotice) {
+      var button = document.getElementById(NOTICES[activeNotice].button);
+      if (button) button.setAttribute('aria-pressed', 'false');
+      activeNotice = null;
+    }
     info.hidden = true;
     markList();
   }
+
+  // ---- campus-wide notices -------------------------------------------------
+
+  /**
+   * Open a short facility notice without adding or highlighting map points.
+   * Selecting the open notice again toggles it closed.
+   * @param {string} key a key of GSL.campus.notices
+   */
+  function showNotice(key) {
+    var notice = NOTICES[key];
+    if (!notice) return;
+
+    var button = document.getElementById(notice.button);
+    if (!button) return;
+
+    var turningOff = activeNotice === key;
+    clear();
+    if (turningOff) return;
+
+    activeNotice = key;
+    button.setAttribute('aria-pressed', 'true');
+    info.innerHTML =
+      '<button type="button" class="close" aria-label="Close details">' + GSL.icons.CLOSE + '</button>' +
+      '<div class="pad">' +
+        '<h2 id="info-title">' + esc(notice.name) + '</h2>' +
+        '<p class="notice-copy">' + esc(notice.text) + '</p>' +
+      '</div>';
+    info.hidden = false;
+    map.replayEntrance(info, function () { map.placeCard(canvas, button, info, 18); });
+    info.querySelector('.close').addEventListener('click', function () {
+      clear();
+      button.focus();
+    });
+  }
+
+  Object.keys(NOTICES).forEach(function (key) {
+    var button = document.getElementById(NOTICES[key].button);
+    if (button) button.addEventListener('click', function () { showNotice(key); });
+  });
 
   /**
    * Build the details card for one venue.
@@ -168,7 +215,7 @@
     var place = PLACES[id];
     if (!place) return;
 
-    if (selected) deselect(selected);
+    clear();
     selected = id;
 
     var pin = pinOf(id);
@@ -208,7 +255,9 @@
   // ---- dismissal and repositioning ------------------------------------------
 
   canvas.addEventListener('click', function (event) {
-    if (!event.target.closest('[data-id]') && !event.target.closest('#info')) clear();
+    if (!event.target.closest('[data-id]') &&
+        !event.target.closest('#info') &&
+        !event.target.closest('.svc-btn')) clear();
   });
 
   document.addEventListener('keydown', function (event) {
@@ -219,6 +268,9 @@
 
   function reposition() {
     if (selected) map.placeCard(canvas, pinOf(selected), info, 18);
+    else if (activeNotice) {
+      map.placeCard(canvas, document.getElementById(NOTICES[activeNotice].button), info, 18);
+    }
   }
   window.addEventListener('resize', reposition);
   plan.addEventListener('load', reposition);   // the plan sets the canvas height

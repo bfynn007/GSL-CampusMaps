@@ -57,6 +57,22 @@
   max-width:150px;
 }
 
+/* ---------- campus-wide information button ----------
+   Uses the same compact control language as the Makola service buttons, but
+   opens a notice only: no pins or buildings are highlighted. */
+.svc-bar{position:absolute; top:21px; right:21px; z-index:20; display:flex; gap:8px}
+.svc-btn{
+  display:flex; align-items:center; gap:8px;
+  padding:8px 13px 8px 9px; font:inherit; font-size:13px; font-weight:650;
+  cursor:pointer; border-radius:99px; border:1.5px solid;
+  background:var(--surface); box-shadow:var(--shadow-md);
+  transition:transform .22s var(--spring), box-shadow .2s, background-color .2s, color .2s;
+}
+.svc-btn:hover{transform:translateY(-2px); box-shadow:var(--shadow-lg)}
+.svc-btn svg{width:21px; height:21px; flex:none}
+.svc-btn.washroom{color:#22557a; border-color:#a9c8dd}
+.svc-btn.washroom[aria-pressed="true"]{background:#2b6b96; border-color:#1d4b6d; color:#fff; box-shadow:var(--shadow-lg)}
+
 /* ---------- details card ----------
    Padding lives on .pad so the photograph can run edge to edge. */
 .info{padding:0 0 15px; overflow:hidden; overflow-y:auto}
@@ -71,6 +87,10 @@
 }
 .shot.missing{display:none}   /* set by the script when the artwork is absent */
 .info .sub{margin:0 0 11px; font-size:13px; line-height:1.45; color:var(--muted)}
+.info .notice-copy{
+  margin:0; padding:12px 13px; border-radius:10px;
+  background:#e8f1f8; color:#1d4b6d; font-size:13.5px; line-height:1.55;
+}
 
 .classes{margin:0; padding:0; list-style:none}
 .classes li{
@@ -111,6 +131,9 @@
 
 /* ---------- narrow screens ---------- */
 @media(max-width:720px){
+  .svc-bar{top:13px; right:13px}
+  .svc-btn{padding:9px; border-radius:50%}
+  .svc-btn .label{display:none}
   .info{max-height:64vh}
 }
 

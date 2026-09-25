@@ -24,58 +24,72 @@ window.GSL.campus = {
 
   places: {
     'main-building': {
-      name: 'Main Building',
-      sub: 'Lecture Hall 1 is upstairs on the left, room LS221',
+      name: 'Lecture Hall 1',
+      sub: 'Pre-Bar classes, second floor, room LS221',
       road: 'GIMPA campus, Accra',
-      x: 35.1, y: 35.6, r: '19%',
+      x: 46.0, y: 34.0, r: '16%',
       shot: 'assets/img/gimpa/main-building.webp',
-      where: 'The long block directly north of Lecture Hall 2, below the admin office. Lecture Hall 1 is up the stairs and to the left.',
+      where: 'On the second floor of the central teaching block labelled Lecture Hall 1, directly above Lecture Hall 2.',
       classes: [
-        { what: 'Part One classes', room: 'Lecture Hall 1, room LS221' }
+        { what: 'Pre-Bar classes', room: 'Second floor, room LS221' }
       ],
       gps: '5.63331,-0.20025'
     },
 
     'lecture-hall-2': {
       name: 'Lecture Hall 2',
-      sub: 'Room LS002',
+      sub: 'Part Two classes, ground floor, room LS002',
       road: 'GIMPA campus, Accra',
-      x: 46.3, y: 51.3, r: '22%',
+      x: 41.0, y: 54.5, r: '16%',
       shot: 'assets/img/gimpa/lecture-hall-2.webp',
-      where: 'The long building with the hipped roof and the glazed frontage along its southern side, directly south of the Main Building.',
+      where: 'On the ground floor of the same central teaching block as Lecture Hall 1, beside the front walkway.',
       classes: [
-        { what: 'Part Two classes', room: 'Room LS002' }
+        { what: 'Part Two classes', room: 'Ground floor, room LS002' }
       ],
       gps: '5.63325,-0.20036'
     },
 
-    'washrooms': {
-      name: 'Washrooms',
-      sub: 'Rooms LS019 and LS021',
+    'library': {
+      name: 'Library',
+      sub: 'Topmost floor of the central teaching block',
       road: 'GIMPA campus, Accra',
-      x: 55.0, y: 34.6, r: '13%',
-      shot: 'assets/img/gimpa/washrooms.webp',
-      where: 'At the eastern end of the main block, a short walk from Lecture Hall 1.',
-      gps: '5.63337,-0.20020'
+      x: 50.0, y: 52.0, r: '14%',
+      where: 'On the topmost floor of the same building as Lecture Halls 1 and 2.'
+    },
+
+    'canteen-1': {
+      name: 'Canteen',
+      sub: 'Food and refreshments',
+      road: 'GIMPA campus, Accra',
+      x: 34.0, y: 39.5, r: '11%',
+      where: 'Between the Admin Office and Lecture Hall 2, on the west side of the central teaching block.'
     },
 
     'canteen': {
-      name: 'Canteen',
+      name: 'Canteen 2',
       sub: 'Food and refreshments',
       road: 'GIMPA campus, Accra',
       x: 28.9, y: 68.8, r: '14%',
       shot: 'assets/img/gimpa/canteen.webp',
-      where: 'The small block on the west side of the forecourt, below Lecture Hall 2 and beside the car park.',
+      where: 'The lower canteen on the west side of the forecourt, below Lecture Hall 2 and beside the lower car park.',
       gps: '5.63299,-0.20042'
+    },
+
+    'parking-2': {
+      name: 'Parking 2',
+      sub: 'Parking for the lecture-hall frontage',
+      road: 'GIMPA campus, Accra',
+      x: 46.5, y: 67.0, r: '12%',
+      where: 'To the right of Canteen 2, facing the front of Lecture Hall 2.'
     },
 
     'admin-office': {
       name: 'Admin Office',
       sub: 'Campus administration and front desk',
       road: 'GIMPA campus, Accra',
-      x: 54.5, y: 26.5, r: '14%',
+      x: 35.5, y: 26.5, r: '12%',
       shot: 'assets/img/gimpa/admin-office.webp',
-      where: 'The block north of the main teaching range, on the eastern side of the entrance drive.',
+      where: 'The block north-west of Lecture Hall 1, beside the upper car park and entrance drive.',
       gps: '5.63348,-0.20006'
     },
 
@@ -87,6 +101,14 @@ window.GSL.campus = {
       shot: 'assets/img/gimpa/parking.webp',
       where: 'The paved lot north-west of the admin office, at the top of the entrance drive.',
       gps: '5.63347,-0.20042'
+    }
+  },
+
+  notices: {
+    washrooms: {
+      button: 'btnWashrooms',
+      name: 'Washrooms',
+      text: 'Washrooms are available in every block and on every floor across the campus.'
     }
   },
 

@@ -190,9 +190,9 @@ more than one map page in `map.css`.
 ## Known gaps
 
 - The GIMPA building illustrations (`assets/img/gimpa/*.webp`, other than the
-  plan) have not been drawn yet, although the seven venues already reference
-  them. The details card detects the missing file and hides the image, so the
-  page is correct either way.
+  plan) have not been drawn yet, although five of the eight venues already
+  reference them. The details card detects the missing file and hides the
+  image, so the page is correct either way.
 - UPSA is one building, not a spread of them, so four of its five venues share
   the building's own `gps`. A coordinate cannot separate two floors; the floor
   and the side of the corridor live in `sub` and `where` instead. Pin positions

@@ -92,6 +92,20 @@
         <!-- viewBox must match the coordinate space the landmark data uses. -->
         <svg class="landmarks" id="landmarks" viewBox="0 0 800 800" preserveAspectRatio="none" aria-hidden="true"></svg>
         <div class="pins" id="pins"></div>
+
+        <div class="svc-bar" aria-label="Campus facilities">
+          <button class="svc-btn washroom" id="btnWashrooms" type="button" aria-pressed="false"
+                  aria-controls="info" title="Washroom information">
+            <svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor">
+              <circle cx="6.6" cy="4.2" r="2.1"/>
+              <path d="M4.3 7.9h4.6c.7 0 1.2.6 1.1 1.3l-.9 4.2H8.2v7.2c0 .5-.4.9-.9.9H5.9c-.5 0-.9-.4-.9-.9v-7.2H4.1l-.9-4.2c-.1-.7.4-1.3 1.1-1.3z"/>
+              <circle cx="17.4" cy="4.2" r="2.1"/>
+              <path d="M17.4 7.9c1.7 0 2.7 1 3.1 2.4l1.1 3.9c.1.5-.2.9-.7.9h-1v5.5c0 .5-.4.9-.9.9h-3.2c-.5 0-.9-.4-.9-.9v-5.5h-1c-.5 0-.8-.4-.7-.9l1.1-3.9c.4-1.4 1.4-2.4 3.1-2.4z"/>
+            </svg>
+            <span class="label">Washrooms</span>
+          </button>
+        </div>
+
         <div class="info" id="info" role="dialog" aria-labelledby="info-title" hidden></div>
       </div>
     </div>
